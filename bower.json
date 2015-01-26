@@ -1,0 +1,31 @@
+{
+  "name": "spongedocs-theme",
+  "version": "0.0.1",
+  "homepage": "https://github.com/gratimax/spongedocs-theme",
+  "private": true,
+  "authors": [
+    "gratimax"
+  ],
+  "description": "The theme for the sponge documentation",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "roboto-fontface": "~0.2.7"
+  },
+  "overrides": {
+    "roboto-fontface": {
+      "main": [
+        "./fonts/Roboto-Regular.*",
+        "./fonts/Roboto-RegularItalic.*",
+        "./fonts/Roboto-Bold.*",
+        "./fonts/Roboto-BoldItalic.*"
+      ]
+    }
+  }
+}

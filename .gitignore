@@ -102,3 +102,4 @@ node_modules
 
 ## Build
 build/
+bower_components/
