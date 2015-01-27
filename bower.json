@@ -16,7 +16,8 @@
     "tests"
   ],
   "dependencies": {
-    "roboto-fontface": "~0.2.7"
+    "roboto-fontface": "~0.2.7",
+    "entypo": "*"
   },
   "overrides": {
     "roboto-fontface": {
@@ -25,6 +26,11 @@
         "./fonts/Roboto-RegularItalic.*",
         "./fonts/Roboto-Bold.*",
         "./fonts/Roboto-BoldItalic.*"
+      ]
+    },
+    "entypo": {
+      "main": [
+        "./font/entypo.*"
       ]
     }
   }
