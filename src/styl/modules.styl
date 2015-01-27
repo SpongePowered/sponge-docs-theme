@@ -1,42 +1,36 @@
-module()
+module(light, dark, icon)
+
+  background light
+  border-left 4px solid dark
+  padding 12px
+
   .admonition-title
-    color #fff
-    margin -7px
-    top -7px
+    color dark
+    top -4px
     position relative
-    padding 6px 12px
-    font-weight normal
+    //margin 8px 0 0 0
+    font-size 1.2rem
+
+    &::before
+      font-family entypo
+      font-style normal
+
+      display inline-block
+      width 1.3em
+      margin-right .1em
+      text-align center
+      content icon
 
 .admonition
   
   &.warning
-    module()
-    
-    background #ffedcc
-    
-    .admonition-title
-      background #f0b37e
+    module(#ffedcc, #f0b37e, '\2716')
     
   &.tip
-    module()
-
-    background #dbfaf4
-    
-    .admonition-title
-      background #1abc9c
+    module(#dbfaf4, #1abc9c, '\e705')
       
   &.hint
-    module()
-
-    background #dbfaf4
-    
-    .admonition-title
-      background #1abc9c
+    module(#dbfaf4, #1abc9c, '\e705')
   
   &.note
-    module()
-
-    background #e7f2fa
-    
-    .admonition-title
-      background #6ab0de
+    module(#e7f2fa, #6ab0de, '\e705')

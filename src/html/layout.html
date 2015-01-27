@@ -5,7 +5,7 @@
 {%- set reldelim1 = reldelim1 is not defined and ' &raquo;' or reldelim1 %}
 {%- set reldelim2 = reldelim2 is not defined and ' |' or reldelim2 %}
 {%- set render_sidebar = (not embedded) and (not theme_nosidebar|tobool) and
-                         (sidebars != []) and False %}
+                         (sidebars != []) %}
 {%- set url_root = pathto('', 1) %}
 {# XXX necessary? #}
 {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
@@ -46,27 +46,27 @@
               <img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/>
             </a></p>
           {%- endif %}
+        {%- endblock %}
+        {%- if sidebars != None %}
+          {#- new style sidebar: explicitly include/exclude templates #}
+          {%- for sidebartemplate in sidebars %}
+            {%- include sidebartemplate %}
+          {%- endfor %}
+        {%- else %}
+          {#- old style sidebars: using blocks -- should be deprecated #}
+          {%- block sidebartoc %}
+            {%- include "localtoc.html" %}
           {%- endblock %}
-          {%- if sidebars != None %}
-            {#- new style sidebar: explicitly include/exclude templates #}
-            {%- for sidebartemplate in sidebars %}
-              {%- include sidebartemplate %}
-            {%- endfor %}
-          {%- else %}
-            {#- old style sidebars: using blocks -- should be deprecated #}
-            {%- block sidebartoc %}
-              {%- include "localtoc.html" %}
-            {%- endblock %}
-            {%- block sidebarrel %}
-              {%- include "relations.html" %}
-            {%- endblock %}
-            {%- block sidebarsourcelink %}
-             {%- include "sourcelink.html" %}
-            {%- endblock %}
-            {%- if customsidebar %}
-              {%- include customsidebar %}
-            {%- endif %}
-            {%- block sidebarsearch %}
+          {%- block sidebarrel %}
+            {%- include "relations.html" %}
+          {%- endblock %}
+          {%- block sidebarsourcelink %}
+           {%- include "sourcelink.html" %}
+          {%- endblock %}
+          {%- if customsidebar %}
+            {%- include customsidebar %}
+          {%- endif %}
+          {%- block sidebarsearch %}
             {%- include "searchbox.html" %}
           {%- endblock %}
         {%- endif %}
@@ -151,11 +151,10 @@
       {%- block relbar1 %}{{ relbar() }}{% endblock %}
 
       {%- block content %}
-        {%- block sidebar1 %} {# possible location for sidebar #} {% endblock %}
+        {%- block sidebar1 %} {{ sidebar() }} {% endblock %}
 
         <div class="document">
           {%- block document %}
-            <i class="icon-graduation-cap"></i>
             <div class="documentwrapper">
               {%- if render_sidebar %}
               <div class="bodywrapper">
@@ -169,7 +168,7 @@
             </div>
           {%- endblock %}
 
-          {%- block sidebar2 %}{{ sidebar() }}{% endblock %}
+          {%- block sidebar2 %}{% endblock %}
           <div class="clearer"></div>
         </div>
       {%- endblock %}
