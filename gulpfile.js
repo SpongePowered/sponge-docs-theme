@@ -98,7 +98,12 @@ gulp.task('styl-dev', function () {
     .pipe(gulp.dest('./build/static/'));
 });
 
-gulp.task('build-dev', ['fonts', 'conf', 'html', 'static', 'styl-dev']);
+gulp.task('build-cp', function (cb) {
+  return gulp.src('./build/**/*')
+    .pipe(gulp.dest('../docs/sponge-theme'));
+});
+
+gulp.task('build-dev', ['fonts', 'conf', 'html', 'static', 'styl-dev', 'build-cp']);
 
 // Rebuild when files are changed
 gulp.task('dev', ['build-dev'], function (cb) {
