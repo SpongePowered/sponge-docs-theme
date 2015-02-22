@@ -7,7 +7,6 @@
 {%- set render_sidebar = (not embedded) and (not theme_nosidebar|tobool) and
                          (sidebars != []) %}
 {%- set url_root = pathto('', 1) %}
-{# XXX necessary? #}
 {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
 {%- if not embedded and docstitle %}
   {%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
@@ -15,10 +14,16 @@
   {%- set titlesuffix = "" %}
 {%- endif %}
 
+{% set script_files = script_files + ["_static/store.min.js"] %}
+{% set script_files = script_files + ["_static/lights.js"] %}
+
 {%- macro relbar() %}
   <div class="related" role="navigation" aria-label="related navigation">
     <h3>{{ _('Navigation') }}</h3>
     <ul>
+      <span style="float: right" class="lights" title="Toggles syntax highlighting between light and dark">
+        <i class="icon-lamp"></i> Highlight Code Light/Dark
+      </span>
       {%- for rellink in rellinks %}
         <li class="right" {% if loop.first %}style="margin-right: 10px"{% endif %}>
           <a href="{{ pathto(rellink[0]) }}" title="{{ rellink[1]|striptags|e }}"
@@ -55,7 +60,7 @@
         {%- else %}
           {#- old style sidebars: using blocks -- should be deprecated #}
           {%- block sidebartoc %}
-            {%- include "localtoc.html" %}
+            {%- include "globaltoc.html" %}
           {%- endblock %}
           {%- block sidebarrel %}
             {%- include "relations.html" %}
@@ -92,8 +97,10 @@
 
 {%- macro css() %}
   <link rel="stylesheet" href="{{ pathto('_static/basic.css', 1) }}" type="text/css" />
-  <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
   <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ pathto('_static/tomorrow.css', 1) }}" type="text/css" />
+  <link id="syntax-highlighting-ref" rel="stylesheet" href="{{ pathto('_static/tomorrow_night.css', 1) }}" type="text/css" />
   {%- for cssfile in css_files %}
     <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
   {%- endfor %}
