@@ -43,18 +43,13 @@ gulp.task('clean', function (cb) {
   ], cb);
 });
 
-// Copies theme.conf
-gulp.task('conf', function () {
-  return gulp.src('./src/theme.conf')
+// Copies theme.conf and html templates
+gulp.task('copy', function () {
+  return gulp.src(['./src/theme.conf', './src/html/**/*'])
     .pipe(gulp.dest('./build/'));
 });
 
-// Copies html templates
-gulp.task('html', function () {
-  return gulp.src('./src/html/**/*')
-    .pipe(gulp.dest('./build/'));
-});
-
+// Copies static files
 gulp.task('static', function () {
   return gulp.src('./src/static/**/*')
     .pipe(gulp.dest('./build/static/'));
@@ -82,7 +77,7 @@ gulp.task('fonts', function () {
 gulp.task('build', function (cb) {
   runSeq(
     'clean',
-    ['fonts', 'conf', 'html', 'static', 'styl'],
+    ['fonts', 'copy', 'static', 'styl'],
     cb
   );
 });
@@ -98,12 +93,7 @@ gulp.task('styl-dev', function () {
     .pipe(gulp.dest('./build/static/'));
 });
 
-gulp.task('build-cp', function (cb) {
-  return gulp.src('./build/**/*')
-    .pipe(gulp.dest('../docs/sponge-theme'));
-});
-
-gulp.task('build-dev', ['fonts', 'conf', 'html', 'static', 'styl-dev', 'build-cp']);
+gulp.task('build-dev', ['fonts', 'copy', 'static', 'styl-dev']);
 
 // Rebuild when files are changed
 gulp.task('dev', ['build-dev'], function (cb) {

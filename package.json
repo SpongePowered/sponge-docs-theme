@@ -6,6 +6,7 @@
   "author": "gratimax",
   "license": "MIT",
   "dependencies": {
+    "gulp-util": "^3.0.3",
     "jeet": "^6.1.2",
     "nib": "^1.1.0",
     "typographic": "^1.1.0"
