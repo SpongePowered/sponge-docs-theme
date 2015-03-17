@@ -8,3 +8,5 @@ npm install
 bower install
 gulp 
 ```
+
+Remember to run `gulp build` before committing.

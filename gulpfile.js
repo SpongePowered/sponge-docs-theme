@@ -73,11 +73,24 @@ gulp.task('fonts', function () {
     .pipe(gulp.dest('./build/static/fonts/'));
 });
 
+// Copies and deploys python files
+gulp.task('py', function () {
+  return gulp.src('./src/py/**/*.py')
+    .pipe(gulp.dest('./build/'));
+});
+
+// Distributes into sponge_docs_theme
+gulp.task('dist', function () {
+  return gulp.src('./build/**/*')
+    .pipe(gulp.dest('./sponge_docs_theme'));
+});
+
 // Performs build
 gulp.task('build', function (cb) {
   runSeq(
     'clean',
-    ['fonts', 'copy', 'static', 'styl'],
+    ['fonts', 'copy', 'py', 'static', 'styl'],
+    ['dist'],
     cb
   );
 });
@@ -93,7 +106,7 @@ gulp.task('styl-dev', function () {
     .pipe(gulp.dest('./build/static/'));
 });
 
-gulp.task('build-dev', ['fonts', 'copy', 'static', 'styl-dev']);
+gulp.task('build-dev', ['fonts', 'copy', 'py', 'static', 'styl-dev']);
 
 // Rebuild when files are changed
 gulp.task('dev', ['build-dev'], function (cb) {
