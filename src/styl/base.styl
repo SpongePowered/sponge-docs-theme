@@ -1,44 +1,186 @@
+html
+  font-family Roboto, sans-serif
+  font-size 14px
+  color #474a54
+  scroll-behavior smooth
+
 body
   background #f3f2f0
   margin 0
 
+:target:before
+    content ""
+    display block
+    height 65px
+    margin -65px 0 0
+
+.topbar
+  position fixed
+  top 0
+  z-index 9999
+  width 100%
+  height 63px
+  background-color #3a3a3a
+  box-shadow 0 2px 4px -1px rgba(0, 0, 0, 0.25)
+
+  :first-child
+    max-width 1110px
+    margin 0px auto
+    position center
+
+    h3
+      display none
+
+.menu-left
+  float left
+  padding 11px 0 0
+  cursor pointer
+  height 63px
+
+  i
+    color #bdc3c7
+
+  &:hover
+    background-color #2a2a2a
+
+    ul
+      display block
+
+.menu-right
+  float right
+  padding 16px 0 0
+  cursor pointer
+  height 63px
+  margin 0 5px
+
+  &:hover ul
+    display block
+
+  div
+    float right
+    padding 8px
+    background-color #f6cf17
+
+    .dropdown
+      margin-top 20px
+
+    &:hover
+      background-color #eedd66
+
+  div a
+    font-size 13px
+    padding-left 6px
+
+
+.dropdown
+  background-color #fff
+  display none
+  border-radius 0 0 4px 4px
+  border 1px solid #e4e4e4
+
+  a
+    text-decoration none
+    color #474a54
+
+  li
+    color #474a54
+    display block
+
+    &:hover
+      background-color #eee
+
+    i
+      color #474a54
+      margin-right 10px
+
+.dropdown#ddleft
+  margin-top 12px
+  padding 10px 0 4px
+
+  li
+    padding 10px 20px 10px 10px
+
+  i
+    padding 0 10px 0 5px
+
+.dropdown#ddvers
+  margin-top 47px
+  padding 10px 0
+
+  li
+    padding 10px 5px
+
+.dropdown#ddlang
+  width 150px
+  padding 10px 5px 5px
+  margin 47px 0 0 -130px
+  position absolute
+  width 150px
+
+  li
+    display inline
+
+    img
+      vertical-align middle
+      height 20px
+
+.active
+  background-color #f6cf17
+
+.controls
+    cursor pointer
+    display block
+    padding-top 20px
+
+    li
+      color #bdc3c7
+      display inline
+      margin 0 5px
+      font-size 18px
+      float right
+
+    a
+      color #f6cf17
+      text-decoration none
+
+      &:hover
+        color #bdc3c7
 
 .container
   center(1080px)
   background #fff
   border-bottom 3px solid #e4e4e4
-  padding 20px
-  margin-top 20px
-  margin-bottom 20px
-  box-shadow 0 0 2px rgba(0, 0, 0, 0.05)
+  padding 10px 20px 20px
+  margin 80px auto 20px
 
-a
-  color #2980B9
-  text-decoration none
-
-  &:visited
-    //color #9B59B6
+  a
     color #2980B9
+    text-decoration none
 
-.related
-  padding 12px 0
+    &:visited
+      //color #9B59B6
+      color #2980B9
+
+#lights
+  float right
+  background-color #f6cf17
+  margin-left 4px
+
+.breadcrumbs
+  width 100%
+  padding 0 0 5px 8px
+  border-bottom 1px solid #e4e4e4
 
   ul
-    font-size 14px
-    padding-left 0 !important
+    display block
+    padding 0
 
-  .lights
-    cursor pointer
-    color #a4b6ce
-    background-color #edf4fc
-    padding 8px
-    border-bottom 2px solid #d7e5f2
-    position relative
-    top -7px
-    border-radius 4px
+  ul li
+    display inline
 
-    &:hover
-      background-color #dae1e9
+  i
+    margin 0 0 0 5px
+    display inline
 
 div.document
   column(2/3)
@@ -83,31 +225,12 @@ div.sphinxsidebar
   h4
     margin 8px 0
 
-div.related
-  cf()
-  clear both
-  width auto
-
-  &:first-child
-    margin 0 -20px 12px -20px
-    padding 10px 30px
-    border-bottom 1px solid #ddd
-
-  .lights-icon
-    height 15px
-    width 15px
-    font-size 14px
-
 .footer
   cf()
   clear both
-  padding-top 32px
+  padding-top 16px
   font-size 12px
-
-html
-  font-family Roboto, sans-serif
-  font-size 14px
-  color #474a54
+  border-top 1px solid #e4e4e4
 
 p
   margin 0 0 10px 0

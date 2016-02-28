@@ -18,33 +18,64 @@
 {% set script_files = script_files + ["_static/lights.js"] %}
 
 {%- macro relbar() %}
-  <div class="related" role="navigation" aria-label="related navigation">
+  <div role="navigation" aria-label="related navigation">
+    <div class="menu-left">
+      <a href="https://docs.spongepowered.org">
+        <img src="{{pathto("_static/spongelogo.png", 1)}}" height="40px" style="vertical-align:middle"/>
+        <i class="icon-down-open-big lights-icon" style="vertical-align:middle"></i>
+      </a>
+      <ul class="dropdown" id="ddleft">
+        <a href="https://www.spongepowered.org"><li><i class="icon-home lights-icon"></i> Homepage</li></a>
+        <a href="https://forums.spongepowered.org"><li><i class="icon-pencil lights-icon"></i> Forums</li></a>
+        <a href="https://github.com/SpongePowered"><li><i class="icon-code lights-icon"></i> Code</li></a>
+        <a href="https://docs.spongepowered.org"><li class="active"><i class="icon-book-open lights-icon"></i> SpongeDocs</li></a>
+        <a href="https://jd.spongepowered.org"><li><i class="icon-graduation-cap lights-icon"></i> JavaDocs</li></a>
+        <a href="https://forums.spongepowered.org/c/plugins/plugin-releases"><li><i class="icon-tools lights-icon"></i> Plugins</li></a>
+        <a href="https://forums.spongepowered.org/t/sponge-downloads/11448"><li><i class="icon-download lights-icon"></i> Get Sponge</li></a>
+      </ul>
+    </div>
+    <div class="menu-right">
+      <div><i class="icon-language lights-icon"></i></div>
+        <ul class="dropdown" id="ddlang">
+          {§#curver§}
+          {|#langs|}
+          <li><a href="/test-repo/{§currentversion§}/{|crowdin_code|}/" class="lang"><img src="http://d1ztvzf22lmr1j.cloudfront.net/images/flags/{|crowdin_code|}.png" alt="Flag for {|name|}"/></a></li>
+          {|/langs|}
+          {§/curver§}
+        </ul>
+    </div>
+    <div class="menu-right">
+      <div><i class="icon-tag lights-icon"></i><a>{{ release }}</a></div>
+        <ul class="dropdown" id="ddvers">
+          <li><a href="/test-repo/master/en/"><i class="icon-tag lights-icon"></i> latest</a></li>
+          {[#vers]}
+          <li><a href="/test-repo/{[apiversion]}/en/"><i class="icon-tag lights-icon"></i> {[apiversion]}</a></li>
+          {[/vers]}
+        </ul>
+    </div>
+    <div class="menu-right">
+      <div title="Toggle syntax highlighting between light and dark" id="lights">
+        <i class="icon-lamp lights-icon"></i>
+      </div>
+    </div>
+    <div>
+      <ul class="controls">
+        <li>|</li>
+        {% if next %}
+        <li><a href="{{ next.link|e }}" title="Next Page"><i class="icon-right-open-big lights-icon"></i></a></li>
+        {% endif %}
+        <li><a href="#top" title="To the top"><i class="icon-up-open-big lights-icon"></i></a></li>
+        <li><a href="{{ pathto(master_doc) }}" title="Home"><i class="icon-home lights-icon"></i></a></li>
+        {% if prev %}
+        <li><a href="{{ prev.link|e }}" title="Previous Page"><i class="icon-left-open-big lights-icon"></i></a></li>
+        {% endif %}
+        <li>|</li>
+        {% if pagename != "search" and pagename != "genindex" %}
+          <li><a href="https://{{ github_host }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_branch }}/source/{{ pagename }}{{ source_suffix }}" title="Edit on GitHub"><i class="icon-github lights-icon"></i></a></li>
+        {% endif %}
+      </ul>
+    </div>
     <h3>{{ _('Navigation') }}</h3>
-    <ul>
-      <span style="float: right" class="lights" title="Toggles syntax highlighting between light and dark">
-        <i class="icon-lamp lights-icon"></i> Highlight Code Light/Dark
-      </span>
-      {%- for rellink in rellinks %}
-        <li class="right" {% if loop.first %}style="margin-right: 10px"{% endif %}>
-          <a href="{{ pathto(rellink[0]) }}" title="{{ rellink[1]|striptags|e }}"
-             {{ accesskey(rellink[2]) }}>{{ rellink[3] }}</a>
-          {%- if not loop.first %}{{ reldelim2 }}{% endif %}</li>
-      {%- endfor %}
-      {%- block rootrellink %}
-        <li><a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>{{ reldelim1 }}</li>
-      {%- endblock %}
-      {%- for parent in parents %}
-        <li><a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>{{ reldelim1 }}</li>
-      {%- endfor %}
-      {%- block relbaritems %} {% endblock %}
-        <li class="right">
-          {% if pagename != "search" and pagename != "genindex" %}
-            <a href="https://{{ github_host }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_branch }}/source/{{ pagename }}{{ source_suffix }}" class="right">
-            <img src="{{pathto("_static/GitHub-Mark-32px.png", 1)}}" height="12px"/> Edit on GitHub</a>
-            {{ reldelim2 }}
-          {% endif %}
-        </li>
-    </ul>
   </div>
 {%- endmacro %}
 
@@ -175,11 +206,24 @@
     {{ ga() }}
     {%- block extrahead %} {% endblock %}
   </head>
-  <body role="document">
+  <body role="document" id="top">
+    <div class="topbar">
+      {%- block relbar1 %}{{ relbar() }}{% endblock %}
+    </div>
     <div class="container">
       {%- block header %}{% endblock %}
 
-      {%- block relbar1 %}{{ relbar() }}{% endblock %}
+      <div class="breadcrumbs">
+        <ul>
+        {%- block rootrellink2 %}
+        <li><a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a><i class="icon-right-open lights-icon"></i></li>
+      {%- endblock %}
+      {%- for parent in parents %}
+        <li><a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a><i class="icon-right-open lights-icon"></i></li>
+      {%- endfor %}
+        </ul>
+      </div>
+
 
       {%- block content %}
         {%- block sidebar1 %} {{ sidebar() }} {% endblock %}
