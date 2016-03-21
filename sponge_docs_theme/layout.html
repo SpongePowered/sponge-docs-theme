@@ -160,6 +160,15 @@
   {%- endfor %}
 {%- endmacro %}
 
+{%- macro altlangs() %}
+  {§#curver§}
+  {|#langs|}
+  <link rel="alternate" hreflang="{|crowdin_code|}" href="/{§currentversion§}/{|crowdin_code|}/">
+  {|/langs|}
+  {§/curver§}
+  <link rel="alternate" hreflang="x-default" href="/">
+{%- endmacro %}
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset={{ encoding }}" />
@@ -204,6 +213,7 @@
       {%- endif %}
     {%- endblock %}
     {{ ga() }}
+    {{ altlangs() }}
     {%- block extrahead %} {% endblock %}
   </head>
   <body role="document" id="top">
