@@ -39,7 +39,7 @@
         <ul class="dropdown" id="ddlang">
           {§#curver§}
           {|#langs|}
-          <li><a href="/test-repo/{§currentversion§}/{|crowdin_code|}/" class="lang"><img src="http://d1ztvzf22lmr1j.cloudfront.net/images/flags/{|crowdin_code|}.png" alt="Flag for {|name|}"/></a></li>
+          <li><a href="/{§currentversion§}/{|crowdin_code|}/" class="lang"><img src="http://d1ztvzf22lmr1j.cloudfront.net/images/flags/{|crowdin_code|}.png" alt="Flag for {|name|}"/></a></li>
           {|/langs|}
           {§/curver§}
         </ul>
@@ -47,9 +47,9 @@
     <div class="menu-right">
       <div><i class="icon-tag lights-icon"></i><a>{{ release }}</a></div>
         <ul class="dropdown" id="ddvers">
-          <li><a href="/test-repo/master/en/"><i class="icon-tag lights-icon"></i> latest</a></li>
+          <li><a href="/master/en/"><i class="icon-tag lights-icon"></i> latest</a></li>
           {[#vers]}
-          <li><a href="/test-repo/{[apiversion]}/en/"><i class="icon-tag lights-icon"></i> {[apiversion]}</a></li>
+          <li><a href="/{[apiversion]}/en/"><i class="icon-tag lights-icon"></i> {[apiversion]}</a></li>
           {[/vers]}
         </ul>
     </div>
