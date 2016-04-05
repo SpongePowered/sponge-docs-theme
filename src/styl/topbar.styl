@@ -1,3 +1,8 @@
+$sp-logo-offset-y = -20px
+$sp-logo-height = 63px
+$sp-logo-width = 174px
+$sp-chevron-color = gray
+
 .topbar
   position fixed
   top 0
@@ -6,6 +11,9 @@
   height 63px
   background-color #3a3a3a
   box-shadow 0 2px 4px -1px rgba(0, 0, 0, 0.25)
+  display table
+  clear both
+  line-height 19px
 
   :first-child
     max-width 1110px
@@ -14,21 +22,6 @@
 
     h3
       display none
-
-.menu-left
-  float left
-  padding 11px 0 0
-  cursor pointer
-  height 52px
-
-  i
-    color #bdc3c7
-
-  &:hover
-    background-color #2a2a2a
-
-    ul
-      display block
 
 .menu-right
   float right
@@ -134,3 +127,104 @@
   float right
   background-color #f6cf17
   margin-left 4px
+
+.logo-big
+  max-height 40px
+  vertical-align middle
+
+.sp-logo-container
+  margin-right: -1*$sp-logo-offset-y
+  float left
+  position relative
+  padding-top 11px
+
+
+.sp-logo-container.sp-not-mobileview:hover, .sp-logo-container.sp-mobileview:focus
+
+  .sp-logo-bg
+    display: block
+
+  .sp-logo-menu
+    display: block
+
+.sp-logo-link
+  position: relative
+  z-index: 10
+
+.sp-logo-bg
+  display none
+  width: $sp-logo-width
+  height: $sp-logo-height
+  position absolute
+  top 0
+  background-color #2a2a2a
+  z-index -1
+  left: $sp-logo-offset-y
+
+.sp-logo-menu
+  display: none
+  position: absolute
+  top 0
+  padding-top: $sp-logo-height
+  left: $sp-logo-offset-y
+  width: $sp-logo-width
+  z-index: 5
+  padding-top: $sp-logo-height
+
+.sp-logo-dropdown
+  background-color: #fff
+  -webkit-border-radius: 0 0 4px 4px
+  border-radius: 0 0 4px 4px
+  border: 1px solid #e4e4e4
+  margin: 0
+  padding: 10px 0 4px
+  $active-color = #f6cf17
+  $inactive-color = white
+  $darken-percent = 10%
+
+  a
+    text-decoration none
+
+  li
+    padding 10px 20px 10px 10px
+    color #474a54
+    display block
+    background-color: $inactive-color
+
+    &:hover
+      background-color: darken($inactive-color, $darken-percent)
+
+    &.active
+      background-color: $active-color
+
+    &.active:hover
+      background-color: darken($active-color, $darken-percent)
+
+  i
+    padding: 0 10px 0 5px
+
+.sp-logo-chevron
+  color: $sp-chevron-color
+  display: inline-block
+
+.sp-logo-container.sp-mobileview
+  display: table-row
+
+  .sp-logo-chevron
+    display: inline-block
+    vertical-align: middle
+    position: relative
+    z-index: 10
+    left: -20px
+    padding-left: 20px
+    color: $sp-chevron-color
+
+  ul.sp-logo-dropdown > a
+    display: block
+
+  .sp-logo-bg
+    height: $sp-logo-height
+    padding-top 0
+
+  .sp-logo-menu
+    padding-top: $sp-logo-height
