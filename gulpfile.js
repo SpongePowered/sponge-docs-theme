@@ -64,15 +64,6 @@ gulp.task('styl', function () {
     .pipe(gulp.dest('./build/static/'));
 });
 
-// Copies fonts from bower
-gulp.task('fonts', function () {
-  return gulp.src(mainBowerFiles())
-    .pipe(filter([
-      '*.eot', '*.svg', '*.ttf', '*.woff', '*.woff2'
-    ]))
-    .pipe(gulp.dest('./build/static/fonts/'));
-});
-
 // Copies and deploys python files
 gulp.task('py', function () {
   return gulp.src('./src/py/**/*.py')
@@ -89,7 +80,7 @@ gulp.task('dist', function () {
 gulp.task('build', function (cb) {
   runSeq(
     'clean',
-    ['fonts', 'copy', 'py', 'static', 'styl'],
+    ['copy', 'py', 'static', 'styl'],
     ['dist'],
     cb
   );
@@ -106,7 +97,7 @@ gulp.task('styl-dev', function () {
     .pipe(gulp.dest('./build/static/'));
 });
 
-gulp.task('build-dev', ['fonts', 'copy', 'py', 'static', 'styl-dev']);
+gulp.task('build-dev', ['copy', 'py', 'static', 'styl-dev']);
 
 // Rebuild when files are changed
 gulp.task('dev', ['build-dev'], function (cb) {

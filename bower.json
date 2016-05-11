@@ -15,9 +15,6 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "entypo": "*"
-  },
   "overrides": {
     "entypo": {
       "main": [
