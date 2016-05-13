@@ -5,8 +5,7 @@ More coming soon.
 # Development
 ```bash
 npm install
-bower install
-gulp 
+gulp
 ```
 
 Remember to run `gulp build` before committing.

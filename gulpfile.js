@@ -12,7 +12,6 @@ var runSeq = require('run-sequence');
 
 // Build dependencies
 var del = require('del');
-var mainBowerFiles = require('main-bower-files');
 
 // Stylus includes
 var nib = require('nib');
