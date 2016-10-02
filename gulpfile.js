@@ -6,7 +6,7 @@ var gutil = require('gulp-util');
 var filter = require('gulp-filter');
 var minifyCSS = require('gulp-minify-css');
 var rename = require('gulp-rename');
-var stylus = require('gulp-stylus');
+var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var runSeq = require('run-sequence');
 
@@ -24,16 +24,7 @@ var handleError = function (error) {
   this.emit('end');
 };
 
-// Stylus build configuration
-var styl = function () {
-  return stylus({
-    use: [
-      nib(),
-      jeet(),
-      typographic()
-    ]
-  });
-};
+
 
 // Cleans the build directory
 gulp.task('clean', function (cb) {
@@ -55,9 +46,9 @@ gulp.task('static', function () {
 });
 
 // Compiles and minifies stylus
-gulp.task('styl', function () {
-  return gulp.src('./src/styl/index.styl')
-    .pipe(styl())
+gulp.task('sass', function () {
+  return gulp.src('./src/scss/base.scss')
+    .pipe(sass().on('error', sass.logError))
     .pipe(rename('sponge.css'))
     .pipe(minifyCSS())
     .pipe(gulp.dest('./build/static/'));
@@ -79,24 +70,24 @@ gulp.task('dist', function () {
 gulp.task('build', function (cb) {
   runSeq(
     'clean',
-    ['copy', 'py', 'static', 'styl'],
+    ['copy', 'py', 'static', 'sass'],
     ['dist'],
     cb
   );
 });
 
 // Compiles stylus with sourcemaps
-gulp.task('styl-dev', function () {
-  return gulp.src('./src/styl/index.styl')
+gulp.task('sass-dev', function () {
+  return gulp.src('./src/scss/base.scss')
     .pipe(sourcemaps.init())
-    .pipe(styl())
+    .pipe(sass())
     .on('error', handleError)
     .pipe(sourcemaps.write())
     .pipe(rename('sponge.css'))
     .pipe(gulp.dest('./build/static/'));
 });
 
-gulp.task('build-dev', ['copy', 'py', 'static', 'styl-dev']);
+gulp.task('build-dev', ['copy', 'py', 'static', 'sass-dev']);
 
 // Rebuild when files are changed
 gulp.task('dev', ['build-dev'], function (cb) {
