@@ -1,0 +1,26 @@
+div.sphinxsidebar {
+  margin-left: 0;
+}
+
+div.sphinxsidebar .toctree-l2 {
+    display: none;
+}
+div.sphinxsidebar li.current > a {
+    font-weight: 700;
+}
+div.sphinxsidebar .toctree-l1.current, div.sphinxsidebar .toctree-l1.current .toctree-l2 {
+    display: list-item;
+}
+
+div.sphinxsidebar ul {
+    list-style: outside none none !important;
+    padding-left: 0;
+}
+
+div.sphinxsidebar ul ul {
+    margin: 0 0 0 1em;
+}
+
+div.sphinxsidebarwrapper {
+  padding: 0;
+}

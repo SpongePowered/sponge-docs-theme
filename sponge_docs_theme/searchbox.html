@@ -2,12 +2,12 @@
 <div id="searchbox" style="display: none" role="search">
   {#- <h3>{{ _('Quick search') }}</h3> #}
     <form class="search" action="{{ pathto('search') }}" method="get">
-      <div class="searchbox-inner">
-        <input class="field" type="text" name="q" autocomplete="off" />
-        <button class="submit" type="submit"><i class="fa fa-fw fa-search" aria-hidden="true"></i></button>
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
+      <div class="form-group">
+        <input class="form-control" name="q" placeholder="Search" autocomplete="off" type="text">
+        <input name="check_keywords" value="yes" type="hidden">
+        <input name="area" value="default" type="hidden">
       </div>
+      <button type="submit" class="btn btn-default submit"><i class="fa fa-fw fa-search"></i></button>
     </form>
     <p class="searchtip" style="font-size: 90%">
     {#-{{ _('Enter search terms or a module, class or function name.') }}-#}

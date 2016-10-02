@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-lg-9">
+    {%- include "searchbox.html" %}
+  </div>
+  <div class="col-lg-3">
+    <ul class="pagination pagination-sm pull-right">
+      <li><a href="#"><i class="fa fa-fw fa-arrow-left"></i></a></li>
+      <li><a href="#"><i class="fa fa-fw fa-home"></i></a></li>
+      <li><a href="#"><i class="fa fa-fw fa-arrow-up"></i></a></li>
+      <li><a href="#"><i class="fa fa-fw fa-arrow-right"></i></a></li>
+    </ul>
+  </div>
+
+  </div>
+
+## pagination ##
+
+  <ul class="controls">
+
+          {% if next %}
+          <li><a href="{{ next.link|e }}" title="Next Page"><i class="fa fa-fw fa-arrow-right"></i></a></li>
+          {% endif %}
+
+          <li><a href="#top" title="To the top"><i class="fa fa-fw fa-arrow-up"></i></a></li>
+          <li><a href="{{ pathto(master_doc) }}" title="Home"><i class="fa fa-fw fa-home"></i></a></li>
+
+          {% if prev %}
+          <li><a href="{{ prev.link|e }}" title="Previous Page"><i class="fa fa-fw fa-arrow-left"></i></a></li>
+          {% endif %}
+
+          {% if pagename != "search" and pagename != "genindex" %}
+            <li><a href="https://{{ github_host }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_branch }}/source/{{ pagename }}{{ source_suffix }}" title="Edit on GitHub"><i class="fa fa-fw fa-github"></i></a></li>
+          {% endif %}
+
+  </ul>

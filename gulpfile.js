@@ -13,11 +13,6 @@ var runSeq = require('run-sequence');
 // Build dependencies
 var del = require('del');
 
-// Stylus includes
-var nib = require('nib');
-var jeet = require('jeet');
-var typographic = require('typographic');
-
 // Error handling
 var handleError = function (error) {
   gutil.log(error.message);
@@ -45,9 +40,9 @@ gulp.task('static', function () {
     .pipe(gulp.dest('./build/static/'));
 });
 
-// Compiles and minifies stylus
+// Compiles and minifies Sass
 gulp.task('sass', function () {
-  return gulp.src('./src/scss/base.scss')
+  return gulp.src('./src/scss/index.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(rename('sponge.css'))
     .pipe(minifyCSS())
@@ -76,9 +71,9 @@ gulp.task('build', function (cb) {
   );
 });
 
-// Compiles stylus with sourcemaps
+// Compiles sass with sourcemaps
 gulp.task('sass-dev', function () {
-  return gulp.src('./src/scss/base.scss')
+  return gulp.src('./src/scss/index.scss')
     .pipe(sourcemaps.init())
     .pipe(sass())
     .on('error', handleError)
