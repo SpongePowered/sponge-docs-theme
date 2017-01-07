@@ -1,0 +1,69 @@
+#sp-site-title {
+  font-family: Montserrat,Helvetica,Arial,sans-serif ;
+  font-size: 22.5px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin-left: 3px;
+  margin-right: 3px;
+  display: inline-block;
+  font-weight: 700;
+  color: #f7cf0d;
+  vertical-align: middle;
+}
+
+.navbar-brand {
+  padding: 10px 15px 19px !important;
+}
+
+.navbar-brand:hover, .navbar-brand:focus, .navbar-brand .open {
+  background-color: #2a2a2a !important;
+}
+.navbar-brand img {
+  display: inline-block !important;
+}
+
+a.navbar-brand i {
+  font-size: 14px;
+  color: 	#808080;
+}
+
+.navbar {
+  border-radius: 0 !important;
+  background-color: #333333 !important;
+}
+
+.navbar-right li a:focus, .navbar-right li a:hover {
+    background-color: #2a2a2a !important;
+}
+
+.navbar-right li:focus, .navbar-right li:hover {
+  background-color: #2a2a2a !important;
+}
+
+.navbar-right a, .navbar-right a:visited, .navbar-right a:active {
+  color: #f6cf17 !important;
+}
+
+.navbar-right a:hover {
+color: bdc3c7 !important;
+}
+
+.dropdown-menu * {
+  box-sizing: content-box;
+}
+
+.dropdown-menu a, .dropdown-menu li {
+  color: #474a54 !important;
+}
+
+.dropdown-menu a {
+  padding: 10px 20px 10px 10px !important;
+}
+
+.dropdown-menu a:hover, .dropdown-menu li:hover {
+  background-color: #e6e6e6 !important;
+}
+
+.dropdown-menu i {
+ padding: 0 10px 0 5px;
+}
