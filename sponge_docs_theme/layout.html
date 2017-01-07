@@ -34,9 +34,14 @@
           Sponge <span class="caret"></span>
         </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">Javadocs</a></li>
-            <li><a href="#">Bugtracker</a></li>
+            <li><a href="#"><i class="fa fa-fw fa-home"></i>Homepage</a></li>
+            <li><a href="#"><i class="fa fa-fw fa-comments"></i>Forums</a></li>
+            <li><a href="#"><i class="fa fa-fw fa-code"></i>Code</a></li>
+            <li><a href="#"><i class="fa fa-fw fa-book"></i>Docs</a></li>
+            <li><a href="#"><i class="fa fa-fw fa-graduation-cap"></i>Javadocs</a></li>
+            <li><a href="#"><i class="fa fa-fw fa-plug"></i>Plugins</a></li>
+            <li><a href="#"><i class="fa fa-fw fa-download"></i>Downloads</a></li>
+            <li><a href="#"><i class="fa fa-fw fa-comment"></i>Chat</a></li>
           </ul>
       </li>
     </ul>
@@ -160,11 +165,14 @@
 {%- macro css() %}
   <link rel="stylesheet" href="{{ pathto('_static/basic.css', 1) }}" type="text/css" />
   <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/cosmo/bootstrap.min.css" rel="stylesheet">
-  <link href='//fonts.googleapis.com/css?family=Source+Code+Pro|Roboto:400italic,700italic,700,400' rel='stylesheet' type='text/css' />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Roboto:400italic,700italic,700,400" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
   <link rel="stylesheet" href="{{ pathto('_static/tomorrow.css', 1) }}" type="text/css" />
   <link id="syntax-highlighting-ref" rel="stylesheet" href="{{ pathto('_static/tomorrow_night.css', 1) }}" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   {%- for cssfile in css_files %}
     <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
   {%- endfor %}
