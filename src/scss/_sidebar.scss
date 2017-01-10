@@ -1,5 +1,6 @@
 div.sphinxsidebar {
   margin-left: 0;
+  width: 25%;
 }
 
 div.sphinxsidebar .toctree-l2 {
@@ -8,7 +9,8 @@ div.sphinxsidebar .toctree-l2 {
 div.sphinxsidebar li.current > a {
     font-weight: 700;
 }
-div.sphinxsidebar .toctree-l1.current, div.sphinxsidebar .toctree-l1.current .toctree-l2 {
+div.sphinxsidebar .toctree-l1.current,
+div.sphinxsidebar .toctree-l1.current .toctree-l2 {
     display: list-item;
 }
 
