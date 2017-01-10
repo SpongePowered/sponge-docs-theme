@@ -274,12 +274,7 @@
             {%- endblock %}
 
       </div>
-
-      {#- {%- block relbar2 %}{{ relbar() }}{% endblock %} #}
-    </div>
-    <footer class="col-lg-12">
-      {%- block footer %}
-        <div class="footer" role="contentinfo">
+        <div class="footer col-lg-12" role="contentinfo">
           {%- if show_copyright %}
             {%- if hasdoc('copyright') %}
               {% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
@@ -294,7 +289,6 @@
             {% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}.{% endtrans %}
           {%- endif %}
         </div>
-      {%- endblock %}
-    </footer>
+    </div>
   </body>
 </html>
