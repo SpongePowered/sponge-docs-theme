@@ -1,0 +1,70 @@
+@import "sponge_variables";
+@import "base";
+@import "topbar";
+
+#content {
+  margin-top: $sp_topbar_height;
+}
+
+header {
+  margin-top: 50px;
+  text-align: center;
+
+  p {
+    font-size: 105%;
+  }
+
+  form {
+    margin-top: 30px;
+  }
+}
+
+.languages {
+  margin-top: 30px;
+  text-align: center;
+
+  div {
+    padding-top: 10px;
+  }
+
+  a {
+    display: inline-block;
+    color: inherit;
+  }
+
+  p {
+    font-size: 1.2em;
+    margin-top: 8px;
+  }
+
+  img {
+    width: 20%;
+    min-width: 50px;
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+  }
+}
+
+#older-versions {
+  text-align: center;
+}
+
+.old-version {
+  text-align: center;
+
+  a {
+    display: inline-block;
+    line-height: 35px;
+  }
+
+  img {
+    width: 40px;
+    border-radius: 3px;
+    margin-right: 20px;
+    border: 1px solid #e5e5e5;
+  }
+}
+
+footer {
+  margin-bottom: 100px;
+}

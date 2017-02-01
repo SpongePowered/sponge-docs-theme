@@ -1,0 +1,9 @@
+* text=auto
+*.bat text eol=crlf
+*.sh text eol=lf
+*.py text diff=python
+*.html text diff=html
+*.css text diff=css
+*.ico binary
+*.woff binary
+*.woff2 binary

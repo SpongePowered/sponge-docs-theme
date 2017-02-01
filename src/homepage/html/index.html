@@ -1,0 +1,44 @@
+{% extends "include/base.html" %}
+{% set title = "Sponge Documentation" %}
+
+{% block content %}
+    <header>
+        <h1>Welcome to the Sponge Documentation</h1>
+        <p>The official, curated documentation for the Sponge project.</p>
+
+        <form action="/stable/en/search.html">
+            <div class="input-group">
+                <input type="text" name="q" placeholder="Search" class="form-control">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            </div>
+        </form>
+    </header>
+
+    <section class="row languages">
+        {% for language in languages %}
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <a href="/{{ mainVersion }}/{{ language.code }}/">
+                    <img src="https://sponge.dev.minecrell.net/{{ mainVersion }}/en/_static/flags/{{ language.localeCode }}.svg">
+                    <p>{{ language.displayName }}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </section>
+
+    <h2 id="older-versions">Older versions</h2>
+
+    {% for version in versions %}
+        <section class="row old-version">
+            <h3>{{ version }}</h3>
+            {% for language in languages %}
+                <div class="col-xs-2 col-md-1">
+                    <a href="/{{ version }}/{{ language.code }}/">
+                        <img src="https://sponge.dev.minecrell.net/{{ mainVersion }}/en/_static/flags/{{ language.localeCode }}.svg">
+                    </a>
+                </div>
+            {% endfor %}
+        </section>
+    {% endfor %}
+
+
+{% endblock %}

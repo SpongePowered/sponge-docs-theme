@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Danish",
+    "code": "da"
+  },
+  {
+    "name": "German",
+    "code": "de"
+  },
+  {
+    "name": "English, United Kingdom",
+    "code": "en-GB"
+  },
+  {
+    "name": "Pirate English",
+    "code": "en-PT"
+  },
+  {
+    "name": "Spanish",
+    "code": "es"
+  },
+  {
+    "name": "Finnish",
+    "code": "fi"
+  },
+  {
+    "name": "French",
+    "code": "fr"
+  },
+  {
+    "name": "Italian",
+    "code": "it"
+  },
+  {
+    "name": "Japanese",
+    "code": "ja"
+  },
+  {
+    "name": "Korean",
+    "code": "ko"
+  },
+  {
+    "name": "Lithuanian",
+    "code": "lt"
+  },
+  {
+    "name": "Norwegian Bokmal",
+    "code": "nb"
+  },
+  {
+    "name": "Dutch",
+    "code": "nl"
+  },
+  {
+    "name": "Polish",
+    "code": "pl"
+  },
+  {
+    "name": "Portuguese",
+    "code": "pt"
+  },
+  {
+    "name": "Portuguese, Brazilian",
+    "code": "pt-BR"
+  },
+  {
+    "name": "Russian",
+    "code": "ru"
+  },
+  {
+    "name": "Ukrainian",
+    "code": "uk"
+  },
+  {
+    "name": "Chinese Simplified",
+    "code": "zh-CN"
+  },
+  {
+    "name": "Chinese Traditional",
+    "code": "zh-TW"
+  }
+]

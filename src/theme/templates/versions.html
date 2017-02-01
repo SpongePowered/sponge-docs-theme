@@ -1,0 +1,74 @@
+{% macro mark_current(compare, current) %}
+    {% if compare == current %}class="current"{% endif %}
+{% endmacro %}
+
+{% macro language_flag(locale) %}
+    <img src="{{ pathto('_static/flags/' + locale + '.svg', 1) }}"
+         alt="{{ locale|language_code }}" title="{{ locale|language_display_name }}">
+{% endmacro %}
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <i class="fa fa-book"> <span>SpongeDocs</span></i>
+        v: {{ release }}
+        {% if language and language != 'translate' %}{{ language_flag(language) }}{% endif %}
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+
+        {# Languages #}
+        {% if locales %}
+            <dl id="languages">
+                <dt>{% trans %}Languages{% endtrans %}</dt>
+                {% for locale in locales %}
+                    {% if locale != 'translate' %}
+                        <dd><a href="{{ page_link(language=locale|language_code) }}">{{ language_flag(locale) }}</a></dd>
+                    {% endif %}
+                {% endfor %}
+            </dl>
+        {% endif %}
+
+        {# Versions #}
+        {% if versions %}
+            <dl>
+                <dt>{% trans %}Versions{% endtrans %}</dt>
+                {% for version in versions %}
+                    <dd><a {{ mark_current(version, current_version) }}
+                            href="{{ page_link(version=version) }}">{{ version }}</a></dd>
+                {% endfor %}
+            </dl>
+        {% endif %}
+
+        {# Downloads #}
+        {% if downloads %}
+            <dl>
+                <dt>{% trans %}Downloads{% endtrans %}</dt>
+                {% for name, url in downloads %}
+                    <dd><a href="{{ pathto(url, 1) }}">{{ name }}</a></dd>
+                {% endfor %}
+            </dl>
+        {% endif %}
+
+        {# Contribute #}
+        {% if github_page_link or (locales and 'translate' in locales) %}
+            <dl>
+                <dt>{% trans %}Contribute{% endtrans %}</dt>
+                {% if github_page_link %}
+                    <dd><a href="{{ github_page_link() }}">{% trans %}Source{% endtrans %}</a></dd>
+                    <dd><a href="{{ github_page_link('edit') }}">{% trans %}Edit{% endtrans %}</a></dd>
+                {% endif %}
+                {% if locales and 'translate' in locales %}
+                    <dd><a href="{{ page_link(language='translate') }}">{% trans %}Translate{% endtrans %}</a></dd>
+                {% endif %}
+            </dl>
+        {% endif %}
+
+        {# Code theme #}
+        <dl>
+            <dt>{% trans %}Code theme{% endtrans %}</dt>
+            <dd><a class="code-theme-link">{% trans %}Light{% endtrans %}</a></dd>
+            <dd><a class="code-theme-link" data-theme="tomorrow-night">{% trans %}Dark{% endtrans %}</a></dd>
+        </dl>
+
+    </div>
+</div>

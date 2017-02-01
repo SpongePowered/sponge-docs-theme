@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Prepare environment variables for Travis build
+
+github_slug="${TRAVIS_PULL_REQUEST_SLUG:-$TRAVIS_REPO_SLUG}"
+
+# Set GitHub user and repository
+IFS='/' read github_user github_repo <<< "$github_slug"
+export GITHUB_USER="$github_user" GITHUB_REPO="$github_repo"
+
+# Set GitHub branch
+export GITHUB_VERSION="${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}"
+
+echo "Building $GITHUB_USER/$GITHUB_REPO@$GITHUB_VERSION..."

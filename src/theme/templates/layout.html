@@ -1,0 +1,49 @@
+{% extends "!layout.html" %}
+{% set css_files = css_files + ["_static/css/spongedocs.min.css"] %}
+{% set script_files = script_files + ["_static/js/spongedocs.min.js"] %}
+
+{% block sidebartitle %}
+    <div id="sp-logo-container" class="page-scroll">
+        <a class="logo" href="{{ pathto(master_doc) }}">
+            <img src="{{ pathto('_static/spongie-mark-dark.svg', 1) }}">
+            <span>Sponge</span>
+            <i class="fa fa-fw fa-chevron-down"></i>
+        </a>
+        <div id="sp-logo-menu">
+            <ul id="sp-logo-dropdown">
+                <li><a href="https://www.spongepowered.org"><i class="fa-fw fa fa-home"></i>Homepage</a></li>
+                <li><a href="https://forums.spongepowered.org"><i class="fa-fw fa fa-comments"></i>Forums</a></li>
+                <li><a href="https://github.com/SpongePowered"><i class="fa-fw fa fa-code"></i>Code</a></li>
+                <li class="active"><a href="https://docs.spongepowered.org"><i class="fa-fw fa fa-book"></i>Docs</a></li>
+                <li><a href="https://jd.spongepowered.org"><i class="fa-fw fa fa-graduation-cap"></i>Javadocs</a></li>
+                <li><a href="https://forums.spongepowered.org/c/plugins/plugin-releases"><i class="fa-fw fa fa-plug"></i>Plugins</a></li>
+                <li><a href="https://www.spongepowered.org/downloads"><i class="fa-fw fa fa-download"></i>Downloads</a></li>
+                <li><a href="https://www.spongepowered.org/chat"><i class="fa-fw fa fa-comment"></i>Chat</a></li>
+            </ul>
+        </div>
+    </div>
+
+    {% include "searchbox.html" %}
+{% endblock %}
+
+{% block extrahead %}
+    {% if language == 'translate' %}
+        {# Include Crowdin In-Context Localization JS app if this is the translation build #}
+        <script>
+            // Set Crowdin project context for In-Context Localization
+            var _jipt = [['project', 'sponge-docs']];
+        </script>
+        <script src="https://cdn.crowdin.com/jipt/jipt.js"></script>
+    {% endif %}
+
+    <!-- Google Analytics -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-59476017-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+{% endblock %}

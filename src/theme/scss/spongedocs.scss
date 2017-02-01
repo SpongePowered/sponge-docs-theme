@@ -1,0 +1,33 @@
+@import "montserrat";
+
+@import "navbar";
+@import "code_tomorrow_night";
+@import "options";
+
+h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
+  // Use Montserrat as font for headings
+  font-family: $sponge_headline_font;
+}
+
+// Use full screen width
+@media screen and (min-width: 1400px) {
+  .wy-nav-content {
+    margin: auto !important;
+    max-width: 850px !important;
+  }
+
+  .wy-nav-content-wrap {
+    background: none;
+  }
+}
+
+// Use brand color for sidebar
+.wy-nav-side {
+  background: $sponge_dark_grey;
+}
+
+.wy-side-scroll {
+  // Display scroll bars on sidebar only when necessary
+  // (applies only to collapsed sidebar)
+  overflow-y: auto;
+}

@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -e
+
+LOCALE=$1
+# Lookup language code
+LANGUAGE_CODE=`./etc/get_language_code.py "$LOCALE"`
+
+# The directory where we store the built files
+dist_dir="dist/$VERSION/$LANGUAGE_CODE"
+
+# Register path to HTML ZIP download (we'll build it later)
+export HTML_DOWNLOAD="spongedocs-$VERSION-$LANGUAGE_CODE.zip"
+
+# Build HTML docs
+echo "Building page for $LANGUAGE_CODE..."
+sphinx-build -q -D "language=$LOCALE" -d "build/$LOCALE/doctrees" source "$dist_dir"
+
+echo "Building ZIP for $LANGUAGE_CODE..."
+# Build again, but without the list of languages and versions
+env -u LANGUAGES -u VERSIONS -u HTML_DOWNLOAD \
+    sphinx-build -q -D "language=$LOCALE" -d "build/$LOCALE/doctrees" source "build/$LOCALE/html"
+
+# Get absolute path to dist directory
+dist_dir=`realpath "$dist_dir"`
+
+# Create ZIP package of HTML files
+cd "build/$LOCALE/html"
+zip -9 -q -r "$dist_dir/$HTML_DOWNLOAD" .

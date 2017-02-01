@@ -1,0 +1,154 @@
+@import "sponge_variables";
+
+$sp_topbar_height: 70px;
+$sp_logo_width: 200px;
+
+.sponge-logo {
+  @extend .sponge-headline;
+  font-size: 23px;
+  letter-spacing: -1px;
+}
+
+#sp-logo-container {
+  * {
+    z-index: 9999;
+  }
+
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+
+  padding-top: 8px;
+
+  .logo {
+    display: block;
+    color: $sponge_dark_grey;
+
+    width: $sp_logo_width;
+    height: $sp_topbar_height;
+
+    * {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    span {
+      margin-left: 3px;
+      @extend .sponge-logo;
+    }
+
+    img {
+      // Reset style made by sphinx_rtd_theme
+      display: inline;
+      margin: 0;
+      height: 40px;
+      width: auto;
+      background: none;
+      padding: 0;
+      border-radius: 0;
+    }
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.07);
+
+    #sp-logo-menu {
+      display: block;
+    }
+  }
+}
+
+// Left dropdown menu
+#sp-logo-menu {
+  display: none;
+
+  position: absolute;
+  top: $sp_topbar_height;
+  width: $sp_logo_width;
+}
+
+#sp-logo-dropdown {
+  margin: 0;
+  padding: 10px 0 4px;
+
+  background-color: white;
+
+  border: 1px solid #e4e4e4;
+  border-radius: 0 0 4px 4px;
+
+  * {
+    box-sizing: content-box; // This is magic
+  }
+
+  font-size: 15px;
+  text-align: left;
+
+  li, a {
+    display: block;
+  }
+
+  li {
+    padding: 0;
+
+    &.active {
+      // Fix weird 1px border next to active item
+      position: relative;
+      left: -1px;
+      width: $sp_logo_width;
+
+      background-color: $sponge_yellow;
+    }
+  }
+
+  a {
+    padding: 10px 20px 10px 10px;
+    color: #474a54;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1)
+    }
+  }
+
+  i {
+    padding: 0 10px 0 5px;
+  }
+
+}
+
+.wy-side-nav-search {
+  // Use yellow brand color for sidebar header
+  background-color: $sponge_yellow;
+
+  // Search box
+  input[type=text] {
+    // Don't rely on browser styles to set the background
+    background: white;
+    color: black;
+
+    border: none;
+    border-radius: 3px;
+    box-shadow: none;
+  }
+}
+
+.wy-nav-top {
+  background-color: $sponge_yellow;
+
+  a, i {
+    color: $sponge_grey
+  }
+
+  i {
+    // Move the "bars" button in the middle of the line
+    line-height: inherit;
+  }
+
+  a {
+    @extend .sponge-logo;
+
+    // Display Spongie mark before header (we can't easily modify the HTML here
+    // so we do it using CSS)
+    background: url('../spongie-mark-dark.svg') no-repeat;
+    padding-left: 34px; // Keep space for Spongie mark
+  }
+}

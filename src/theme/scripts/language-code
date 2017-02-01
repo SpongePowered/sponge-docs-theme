@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+import sys
+import sponge_docs_theme.languages as languages
+
+locale_code = sys.argv[1]
+
+# Load languages
+languages.load_languages()
+
+# Print language code for locale
+print(languages.get_language_code(locale_code))
