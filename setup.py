@@ -17,14 +17,15 @@ setup(
         '*.json',
         'favicon.ico',
         'templates/*.html',
+        'static/*',
         'static/*/*'
     ]},
     scripts=[
-        'sponge_docs_theme/bin/build-language',
-        'sponge_docs_theme/bin/language-code',
-        'sponge_docs_theme/bin/pr-comment',
-        'sponge_docs_theme/bin/pr-deploy',
-        'sponge_docs_theme/bin/travis-prepare'
+        'dist/scripts/build-language',
+        'dist/scripts/language-code',
+        'dist/scripts/pr-comment',
+        'dist/scripts/pr-deploy',
+        'dist/scripts/travis-prepare'
     ],
 
     classifiers=[

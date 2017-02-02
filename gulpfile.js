@@ -27,7 +27,7 @@ gulp.task('theme:files', () =>
 
 gulp.task('theme:scripts', () =>
     gulp.src('src/theme/scripts/**')
-        .pipe(gulp.dest('sponge_docs_theme/bin'))
+        .pipe(gulp.dest('dist/scripts'))
 );
 
 gulp.task('theme:scss', () =>
