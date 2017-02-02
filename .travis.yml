@@ -1,6 +1,6 @@
 sudo: false
 
-language: nodejs
+language: node_js
 nodejs: 6
 
 script: npm run build
