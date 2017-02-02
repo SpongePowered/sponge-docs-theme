@@ -1,9 +1,11 @@
-#!/usr/bin/env python3
 import json
 import os.path
 
 import babel
 import requests
+
+from . import __version__
+
 
 LOCAL_LANGUAGES_FILE = os.path.join(os.path.dirname(__file__), 'languages.json')
 LANGUAGES_FILE = 'build/languages.json'
@@ -88,4 +90,4 @@ def init(app):
 # This is the entry point if this module is loaded as a Sphinx extension
 def setup(app):
     app.connect('builder-inited', init)
-    return {'version': '0.1'}
+    return {'version': __version__}

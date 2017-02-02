@@ -1,11 +1,4 @@
-def init(app):
-    # Return if we are not doing a HTML build
-    if app.builder.name != 'html':
-        return
-
-    # Trim whitespace in resulting HTML
-    app.builder.templates.environment.trim_blocks = True
-    app.builder.templates.environment.lstrip_blocks = True
+from . import __version__
 
 
 def setup_helpers(app, pagename, templatename, ctx, event_arg):
@@ -27,6 +20,5 @@ def setup_helpers(app, pagename, templatename, ctx, event_arg):
 
 
 def setup(app):
-    app.connect('builder-inited', init)
     app.connect('html-page-context', setup_helpers)
-    return {'version': '0.1'}
+    return {'version': __version__}

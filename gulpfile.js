@@ -46,6 +46,13 @@ gulp.task('theme:js', () =>
 
 gulp.task('theme:build', ['theme:scripts', 'theme:files', 'theme:scss', 'theme:js']);
 
+gulp.task('theme:watch', ['theme:build'], () => {
+    gulp.watch('src/theme/**', ['theme:files']);
+    gulp.watch('src/theme/scripts/**', ['theme:scripts']);
+    gulp.watch('src/theme/scss/**', ['theme:scss']);
+    gulp.watch('src/theme/js/**', ['theme:js']);
+});
+
 // Homepage
 let renderData = null;
 

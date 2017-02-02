@@ -1,8 +1,9 @@
 from setuptools import setup
+import sponge_docs_theme
 
 setup(
     name='sponge-docs-theme',
-    version='0.1.0',
+    version=sponge_docs_theme.__version__,
     description='Theme for Sponge documentation',
     url='https://github.com/SpongePowered/sponge-docs-theme',
     author='SpongePowered',
@@ -14,15 +15,16 @@ setup(
     zip_safe=False,
     package_data={'sponge_docs_theme': [
         '*.json',
+        'favicon.ico',
         'templates/*.html',
         'static/*/*'
     ]},
     scripts=[
-        'bin/build-language',
-        'bin/language-code',
-        'bin/pr-comment',
-        'bin/pr-deploy',
-        'bin/travis-prepare'
+        'sponge_docs_theme/bin/build-language',
+        'sponge_docs_theme/bin/language-code',
+        'sponge_docs_theme/bin/pr-comment',
+        'sponge_docs_theme/bin/pr-deploy',
+        'sponge_docs_theme/bin/travis-prepare'
     ],
 
     classifiers=[
@@ -31,6 +33,5 @@ setup(
         'Programming Language :: Python :: 3',
         'Framework :: Sphinx',
         'Framework :: Sphinx :: Extension',
-        'Framework :: Sphinx :: Theme',
     ]
 )
