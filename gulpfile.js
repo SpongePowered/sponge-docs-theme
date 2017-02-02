@@ -15,20 +15,17 @@ const
     buble = require('gulp-buble'),
     uglify = require('gulp-uglify');
 
+gulp.task('clean', () => del(['sponge_docs_theme', 'dist']));
+
 // Theme
-gulp.task('theme:python', () =>
-    gulp.src('src/theme/*.py')
+gulp.task('theme:files', () =>
+    gulp.src('src/theme/{*.*,{static,templates}/**}')
         .pipe(gulp.dest('sponge_docs_theme'))
 );
 
 gulp.task('theme:scripts', () =>
     gulp.src('src/theme/scripts/**')
         .pipe(gulp.dest('sponge_docs_theme/bin'))
-);
-
-gulp.task('theme:files', () =>
-    gulp.src('src/theme/{static,templates}/**')
-        .pipe(gulp.dest('sponge_docs_theme'))
 );
 
 gulp.task('theme:scss', () =>
@@ -47,7 +44,7 @@ gulp.task('theme:js', () =>
         .pipe(gulp.dest('sponge_docs_theme/static/js'))
 );
 
-gulp.task('theme:build', ['theme:python', 'theme:scripts', 'theme:files', 'theme:scss', 'theme:js']);
+gulp.task('theme:build', ['theme:scripts', 'theme:files', 'theme:scss', 'theme:js']);
 
 // Homepage
 let renderData = null;

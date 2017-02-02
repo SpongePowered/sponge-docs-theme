@@ -11,9 +11,11 @@ setup(
     packages=['sponge_docs_theme'],
     install_requires=['sphinx_rtd_theme'],
 
+    zip_safe=False,
     package_data={'sponge_docs_theme': [
-        'static/*/*',
-        'templates/*.html'
+        '*.json',
+        'templates/*.html',
+        'static/*/*'
     ]},
     scripts=[
         'bin/build-language',

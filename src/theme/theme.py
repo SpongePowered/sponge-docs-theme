@@ -7,6 +7,7 @@ def init(app):
     app.builder.templates.environment.trim_blocks = True
     app.builder.templates.environment.lstrip_blocks = True
 
+
 def setup_helpers(app, pagename, templatename, ctx, event_arg):
 
     def get_page_link(version=None, language=None):

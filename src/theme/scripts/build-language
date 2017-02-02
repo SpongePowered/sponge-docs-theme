@@ -3,7 +3,7 @@ set -e
 
 LOCALE=$1
 # Lookup language code
-LANGUAGE_CODE=`./etc/get_language_code.py "$LOCALE"`
+LANGUAGE_CODE=`language-code "$LOCALE"`
 
 # The directory where we store the built files
 dist_dir="dist/$VERSION/$LANGUAGE_CODE"

@@ -5,7 +5,7 @@ import os.path
 import babel
 import requests
 
-LOCAL_LANGUAGES_FILE = 'etc/languages.json'
+LOCAL_LANGUAGES_FILE = os.path.join(os.path.dirname(__file__), 'languages.json')
 LANGUAGES_FILE = 'build/languages.json'
 languages = None
 

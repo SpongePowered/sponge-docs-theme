@@ -36,4 +36,4 @@ commit=`git rev-parse --short HEAD`
 popd
 
 # Update preview comment on PR
-./etc/pr-comment.py "$commit"
+pr-comment "$commit"

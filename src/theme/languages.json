@@ -1,0 +1,16 @@
+{
+  "en": {
+    "name": "English",
+    "code": "en"
+  },
+  "es_ES": {
+    "code": "es"
+  },
+  "pt_PT": {
+    "code": "pt"
+  },
+  "translate": {
+    "name": "Translate",
+    "code": "translate"
+  }
+}
