@@ -13,7 +13,9 @@ const
 
     // JavaScript
     buble = require('gulp-buble'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+
+    webserver = require('gulp-webserver');
 
 gulp.task('clean', () => del(['sponge_docs_theme', 'dist']));
 
@@ -53,6 +55,8 @@ gulp.task('theme:watch', ['theme:build'], () => {
     gulp.watch('src/theme/js/**', ['theme:js']);
 });
 
+gulp.task('theme', ['theme:watch']);
+
 // Homepage
 let renderData = null;
 
@@ -91,6 +95,21 @@ gulp.task('homepage:scss', () =>
 );
 
 gulp.task('homepage:build', ['homepage:html', 'homepage:scss']);
+
+gulp.task('homepage:watch', ['homepage:build'], () => {
+    gulp.watch('src/homepage/html/**', ['homepage:html']);
+    gulp.watch('src/homepage/scss/**', ['homepage:scss']);
+});
+
+gulp.task('homepage:webserver', ['homepage:watch'], () => {
+    gulp.src('dist/homepage')
+        .pipe(webserver({
+            open: true,
+            livereload: true
+        }))
+});
+
+gulp.task('homepage', ['homepage:webserver']);
 
 gulp.task('build', ['theme:build', 'homepage:build']);
 gulp.task('default', ['build']);
