@@ -25,9 +25,6 @@ module.exports.getVersions = () =>
         const versions = [];
 
         for (branch of branches) {
-            // TEMP
-            branch.name = branch.name.replace('master', 'stable').replace('/', '-');
-
             if (branch.name === 'stable') {
                 versions.push('stable');
             } else if (branch.name.startsWith('release-')) {
