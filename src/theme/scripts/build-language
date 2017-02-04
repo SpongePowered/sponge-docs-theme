@@ -13,12 +13,12 @@ export HTML_DOWNLOAD="spongedocs-$VERSION-$LANGUAGE_CODE.zip"
 
 # Build HTML docs
 echo "Building page for $LANGUAGE_CODE..."
-sphinx-build -q -D "language=$LOCALE" -d "build/$LOCALE/doctrees" source "$dist_dir"
+sphinx-build -q -D "language=$LOCALE" -d build/doctrees source "$dist_dir"
 
 echo "Building ZIP for $LANGUAGE_CODE..."
 # Build again, but without the list of languages and versions
 env -u LANGUAGES -u VERSIONS -u HTML_DOWNLOAD \
-    sphinx-build -q -D "language=$LOCALE" -d "build/$LOCALE/doctrees" source "build/$LOCALE/html"
+    sphinx-build -q -D "language=$LOCALE" -d build/doctrees source "build/$LOCALE/html"
 
 # Get absolute path to dist directory
 dist_dir=`realpath "$dist_dir"`
