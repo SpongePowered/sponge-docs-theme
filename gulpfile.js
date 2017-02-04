@@ -91,7 +91,7 @@ gulp.task('homepage:scss', () =>
         .pipe(sass())
         .pipe(rename({suffix: '.min'}))
         .pipe(cleanCSS())
-        .pipe(gulp.dest('dist/homepage/css'))
+        .pipe(gulp.dest('dist/homepage/_static/css'))
 );
 
 gulp.task('homepage:build', ['homepage:html', 'homepage:scss']);
