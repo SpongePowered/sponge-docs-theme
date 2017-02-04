@@ -3,6 +3,8 @@ const
     del = require('del'),
     rename = require('gulp-rename'),
 
+    svgmin = require('gulp-svgmin'),
+
     // HTML
     nunjucksRender = require('gulp-nunjucks-md'),
     htmlmin = require('gulp-htmlmin'),
@@ -23,6 +25,12 @@ gulp.task('clean', () => del(['sponge_docs_theme', 'dist']));
 gulp.task('theme:files', () =>
     gulp.src('src/theme/{*.*,{static,templates}/**}')
         .pipe(gulp.dest('sponge_docs_theme'))
+);
+
+gulp.task('theme:svg', () =>
+    gulp.src('src/theme/svg/**')
+        .pipe(svgmin())
+        .pipe(gulp.dest('sponge_docs_theme/static'))
 );
 
 gulp.task('theme:scripts', () =>
@@ -46,10 +54,11 @@ gulp.task('theme:js', () =>
         .pipe(gulp.dest('sponge_docs_theme/static/js'))
 );
 
-gulp.task('theme:build', ['theme:scripts', 'theme:files', 'theme:scss', 'theme:js']);
+gulp.task('theme:build', ['theme:files', 'theme:svg', 'theme:scripts', 'theme:scss', 'theme:js']);
 
 gulp.task('theme:watch', ['theme:build'], () => {
     gulp.watch('src/theme/**', ['theme:files']);
+    gulp.watch('src/theme/svg/**', ['theme:svg']);
     gulp.watch('src/theme/scripts/**', ['theme:scripts']);
     gulp.watch('src/theme/scss/**', ['theme:scss']);
     gulp.watch('src/theme/js/**', ['theme:js']);
