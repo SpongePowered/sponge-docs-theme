@@ -1,3 +1,6 @@
+// TODO: Temporary fix for search until sphinx_rtd_theme is updated with the fix
+DOCUMENTATION_OPTIONS['SOURCELINK_SUFFIX'] = '.txt';
+
 $(() => {
     // Default theme: Original light theme by sphinx_rtd_theme
     // For all other themes we apply an additional CSS class to all .highlight
