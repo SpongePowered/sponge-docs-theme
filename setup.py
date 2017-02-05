@@ -10,7 +10,7 @@ setup(
     license='MIT',
 
     packages=['sponge_docs_theme'],
-    install_requires=['sphinx_rtd_theme'],
+    install_requires=['sphinx_rtd_theme==0.1.9'],
 
     zip_safe=False,
     package_data={'sponge_docs_theme': [
