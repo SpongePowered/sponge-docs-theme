@@ -30,13 +30,13 @@ commit = sys.argv[1]
 
 
 def map_change(change):
-    filename: str = change['filename']
+    filename = change['filename']
     return {'filename': filename[filename.find('/')+1:filename.rfind('.')], 'status': change['status']}
 
 
 def filter_change(change):
-    filename: str = change['filename']
-    status: str = change['status']
+    filename = change['filename']
+    status = change['status']
     return filename.startswith('source/') and filename.endswith('.rst') and status in ['added', 'renamed', 'modified']
 
 r = requests.get('%s/pulls/%s/files' % (repo, pr), auth=('x-oauth-basic', token))
