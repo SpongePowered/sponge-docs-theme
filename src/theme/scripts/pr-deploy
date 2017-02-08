@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+if [[ "$TRAVIS_SECURE_ENV_VARS" != "true" ]]; then
+    echo "Cannot deploy pull request without secure environment variables."
+    exit 1
+fi
+
 branch=$TRAVIS_PULL_REQUEST
 echo "Deploying PR #$branch"
 
