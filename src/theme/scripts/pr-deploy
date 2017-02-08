@@ -10,7 +10,7 @@ pushd build/html
 # Initialize new Git repository
 git init
 git config user.name "Spongie"
-git config user.email "spongy@gratimax.net" # TODO
+git config user.email "Spongy@users.noreply.github.com"
 git remote add origin "https://spongy:$GH_TOKEN@github.com/Spongy/SpongeDocs-PRs" >/dev/null
 
 # Check if the branch already exists
