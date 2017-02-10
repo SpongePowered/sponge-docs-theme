@@ -7,6 +7,7 @@
 h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
   // Use Montserrat as font for headings
   font-family: $sponge_headline_font;
+  font-weight: 600;
 }
 
 // Use full screen width

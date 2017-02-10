@@ -6,7 +6,7 @@ $sp_logo_width: 200px;
 .sponge-logo {
   @extend .sponge-headline;
   font-size: 23px;
-  letter-spacing: -1px;
+  font-weight: 600;
 }
 
 #sp-logo-container {
