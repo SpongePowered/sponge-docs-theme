@@ -37,3 +37,11 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 .wy-table-responsive table td, .wy-table-responsive table th {
   white-space: normal;
 }
+
+// Fix font size in paragraphs within tables
+table p {
+   font-size: inherit;
+
+  // Reduce bottom margin
+  margin-bottom: 12px;
+}
