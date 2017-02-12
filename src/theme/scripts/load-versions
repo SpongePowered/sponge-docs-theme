@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+import os
+import sys
+
+import requests
+
+
+def prepare_authentication(user, password):
+    if user and password:
+        return (user, password)
+    else:
+        print("GITHUB_USER and GITHUB_TOKEN is not set; using unauthenticated requests", file=sys.stderr)
+
+GITHUB_AUTH = prepare_authentication(os.environ.get('GITHUB_USER'), os.environ.get('GITHUB_TOKEN'))
+
+GITHUB_OWNER = 'SpongePowered'
+GITHUB_REPO = 'SpongeDocs'
+
+r = requests.get('https://api.github.com/repos/%s/%s/branches' % (GITHUB_OWNER, GITHUB_REPO), auth=GITHUB_AUTH)
+r.raise_for_status()
+
+versions = []
+
+for branch in r.json():
+    name = branch['name']
+    if name == 'stable':
+        versions.append(name)
+    elif name.startswith('release-'):
+        versions.append(name[8:])
+
+# Sort versions (in reversed order)
+versions.sort(reverse=True)
+
+# Print versions separated by space
+print(' '.join(versions))

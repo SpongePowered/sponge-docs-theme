@@ -23,6 +23,8 @@ setup(
     scripts=[
         'dist/scripts/build-language',
         'dist/scripts/language-code',
+        'dist/scripts/load-languages',
+        'dist/scripts/load-versions',
         'dist/scripts/pr-comment',
         'dist/scripts/pr-deploy',
         'dist/scripts/travis-prepare'
