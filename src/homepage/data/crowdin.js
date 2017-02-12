@@ -20,7 +20,7 @@ module.exports.getLocaleMappings = () =>
 if (crowdinApiKey) {
     module.exports.getLanguages = () =>
         rp({
-            uri: `https://api.crowdin.com/api/project/${projectIdentifier}/info`,
+            uri: `https://api.crowdin.com/api/project/${projectIdentifier}/status`,
             qs: {
                 key: crowdinApiKey,
                 json: true
@@ -29,12 +29,15 @@ if (crowdinApiKey) {
         }).then(resp => {
             const languages = [];
 
-            for (language of resp.languages) {
-                if (language.can_translate) {
+            for (language of resp) {
+                // Include only languages with at least 5% progress
+                if (language.translated_progress >= 5 || language.code.startsWith('en-')) {
                     languages.push({
                         name: language.name,
                         code: localLanguages[language.code] || language.code
                     })
+                } else {
+                    console.warn(`Skipping ${language.name} with ${language.translated_progress}% completion`)
                 }
             }
 
