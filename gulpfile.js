@@ -19,7 +19,7 @@ const
 
     webserver = require('gulp-webserver');
 
-gulp.task('clean', () => del(['sponge_docs_theme', 'dist']));
+gulp.task('clean', () => del(['sponge_docs_theme', 'dist', 'build']));
 
 // Theme
 gulp.task('theme:files', () =>
