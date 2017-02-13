@@ -1,10 +1,12 @@
 from . import __version__
+from . import languages
 
 
 def setup_helpers(app, pagename, templatename, ctx, event_arg):
 
     def get_page_link(version=None, language=None):
-        return "/%s/%s/%s" % (version or ctx['current_version'], language or ctx['language'],
+        return "/%s/%s/%s" % (version or ctx['current_version'],
+                              languages.get_language_code(language or ctx['language']),
                               app.builder.get_target_uri(ctx['pagename']))
 
     ctx['page_link'] = get_page_link

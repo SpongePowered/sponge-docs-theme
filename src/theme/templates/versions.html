@@ -22,7 +22,7 @@
                 <dt>{% trans %}Languages{% endtrans %}</dt>
                 {% for locale in locales %}
                     {% if locale != 'translate' %}
-                        <dd><a href="{{ page_link(language=locale|language_code) }}">{{ language_flag(locale) }}</a></dd>
+                        <dd><a href="{{ page_link(language=locale) }}">{{ language_flag(locale) }}</a></dd>
                     {% endif %}
                 {% endfor %}
             </dl>
