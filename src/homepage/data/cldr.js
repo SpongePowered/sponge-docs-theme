@@ -1,11 +1,10 @@
-const cldrData = require('cldr-data');
 const Cldr = require('cldrjs');
 
-Cldr.load(cldrData('supplemental/likelySubtags'));
+Cldr.load(require('cldr-core/supplemental/likelySubtags'));
 
 // Load all bundles
-for (locale of cldrData.availableLocales) {
-    Cldr.load(cldrData(`main/${locale}/languages`))
+for (locale of require('cldr-core/availableLocales').availableLocales.modern) {
+    Cldr.load(require(`cldr-localenames-modern/main/${locale}/languages`))
 }
 
 function toTitleCase(s) {
