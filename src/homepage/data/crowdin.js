@@ -47,7 +47,7 @@ if (crowdinApiKey) {
             return languages;
         });
 } else {
-    console.warn("CROWDIN_API_KEY is not set; using local test languages")
+    console.warn("CROWDIN_API_KEY is not set; using local test languages");
     module.exports.getLanguages = () =>
         new Promise((resolve, reject) => {
             try {
