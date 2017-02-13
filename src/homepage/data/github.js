@@ -13,7 +13,10 @@ if (githubUser && githubToken) {
             headers: {
                 'User-Agent': 'SpongeDocsHomepage'
             },
-            auth,
+            auth: {
+                user: githubUser,
+                pass: githubToken
+            },
             json: true
         }).then(branches => {
             const versions = [];
