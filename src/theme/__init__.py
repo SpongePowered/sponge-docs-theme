@@ -1,7 +1,7 @@
 import os.path
 from .context import setup_html_context
 
-VERSION = (0, 1, 6)
+VERSION = (0, 1, 7)
 __version__ = '.'.join(str(v) for v in VERSION)
 
 
