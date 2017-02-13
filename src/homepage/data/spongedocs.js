@@ -1,10 +1,10 @@
-const github = require('./github');
-const crowdin = require('./crowdin');
+const
+    cldr = require('./cldr'),
+    github = require('./github'),
+    crowdin = require('./crowdin');
 
-function prepareData(versions, languages, localeMappings) {
+function prepareData(cldr, versions, languages, localeMappings) {
     console.log(`Loaded ${versions.length} versions and ${languages.length} supported languages`);
-
-    const cldr = require('./cldr');
 
     // Add native language names to each language
     for (language of languages) {
@@ -32,5 +32,5 @@ function prepareData(versions, languages, localeMappings) {
 }
 
 module.exports.loadData = (done) =>
-    Promise.all([github.getVersions(), crowdin.getLanguages(), crowdin.getLocaleMappings()])
+    Promise.all([cldr.load(), github.getVersions(), crowdin.getLanguages(), crowdin.getLocaleMappings()])
         .then(values => prepareData(...values));
