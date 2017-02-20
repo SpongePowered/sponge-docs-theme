@@ -25,6 +25,7 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 // Use brand color for sidebar
 .wy-nav-side {
   background: $sponge_grey;
+  padding-bottom: 44px;
 }
 
 .wy-side-scroll {
