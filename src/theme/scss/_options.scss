@@ -11,17 +11,23 @@
   @extend .language-flag;
 }
 
-.rst-versions .rst-current-version {
-  color: $sponge_yellow;
+.rst-versions {
+  background: shade($sponge_grey, 35);
+  border: none;
 
-  i span {
-    // Put some space between icon and "SpongeDocs"
-    margin-left: 3px;
-  }
+  .rst-current-version {
+    color: $sponge_yellow;
+    background: $sponge_dark_grey;
 
-  img {
-    @extend .language-flag;
-    margin-left: 2px;
+    i span {
+      // Put some space between icon and "SpongeDocs"
+      margin-left: 3px;
+    }
+
+    img {
+      @extend .language-flag;
+      margin-left: 2px;
+    }
   }
 }
 
