@@ -6,12 +6,6 @@ def _split_environment_variable(name):
     return value and value.split()
 
 
-def _load_downloads():
-    # Path to a downloadable ZIP with the HTML files
-    html_download = os.environ.get('HTML_DOWNLOAD')
-    return html_download and [('HTML', html_download)]
-
-
 def setup_html_context():
     github_user = os.environ.get('GITHUB_USER')
     github_repo = os.environ.get('GITHUB_REPO')
@@ -28,8 +22,8 @@ def setup_html_context():
         'current_version': os.environ.get('VERSION'),
         'versions': _split_environment_variable('VERSIONS'),
 
-        # List of available downloads (for offline usage)
-        'downloads': _load_downloads(),
+        # HTML ZIP download (for offline usage)
+        'html_download': os.environ.get('HTML_DOWNLOAD'),
 
         # Link to GitHub repository
         'display_github': github_user and github_repo and github_version,

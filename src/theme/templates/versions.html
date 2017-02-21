@@ -14,7 +14,7 @@
         {% if language and language != 'translate' %}{{ language_flag(language) }}{% endif %}
         <span class="fa fa-caret-down"></span>
     </span>
-    <div class="rst-other-versions">
+    <div id="versions" class="rst-other-versions">
 
         {# Languages #}
         {% if locales %}
@@ -39,13 +39,11 @@
             </dl>
         {% endif %}
 
-        {# Downloads #}
-        {% if downloads %}
-            <dl>
-                <dt>{% trans %}Downloads{% endtrans %}</dt>
-                {% for name, url in downloads %}
-                    <dd><a href="{{ pathto(url, 1) }}">{{ name }}</a></dd>
-                {% endfor %}
+        {# Offline usage #}
+        {% if html_download %}
+            <dl id="offline">
+                <dt>{% trans %}Offline usage{% endtrans %}</dt>
+                <dd><a href="{{ pathto(html_download, 1) }}">{{ _("Download") }}</a></dd>
             </dl>
         {% endif %}
 
@@ -54,21 +52,13 @@
             <dl>
                 <dt>{% trans %}Contribute{% endtrans %}</dt>
                 {% if github_page_link %}
-                    <dd><a href="{{ github_page_link() }}">{% trans %}Source{% endtrans %}</a></dd>
-                    <dd><a href="{{ github_page_link('edit') }}">{% trans %}Edit{% endtrans %}</a></dd>
+                    <dd><a href="{{ github_page_link() }}">{{ _("Source") }}</a></dd>
+                    <dd><a href="{{ github_page_link('edit') }}">{{ _("Edit") }}</a></dd>
                 {% endif %}
                 {% if locales and 'translate' in locales %}
-                    <dd><a href="{{ page_link(language='translate') }}">{% trans %}Translate{% endtrans %}</a></dd>
+                    <dd><a href="{{ page_link(language='translate') }}">{{ _("Translate") }}</a></dd>
                 {% endif %}
             </dl>
         {% endif %}
-
-        {# Code theme #}
-        <dl>
-            <dt>{% trans %}Code theme{% endtrans %}</dt>
-            <dd><a class="code-theme-link">{% trans %}Light{% endtrans %}</a></dd>
-            <dd><a class="code-theme-link" data-theme="tomorrow-night">{% trans %}Dark{% endtrans %}</a></dd>
-        </dl>
-
     </div>
 </div>

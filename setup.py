@@ -12,10 +12,17 @@ setup(
     packages=['sponge_docs_theme'],
     install_requires=['sphinx_rtd_theme==0.1.9'],
 
+    message_extractors={
+        'src/theme/js': [
+            ('**.js', 'javascript', None),
+        ]
+    },
+
     zip_safe=False,
     package_data={'sponge_docs_theme': [
         '*.json',
         'favicon.ico',
+        'theme.pot',
         'templates/*.html',
         'static/*',
         'static/*/*'
