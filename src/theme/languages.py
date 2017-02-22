@@ -90,4 +90,8 @@ def init(app):
 # This is the entry point if this module is loaded as a Sphinx extension
 def setup(app):
     app.connect('builder-inited', init)
-    return {'version': __version__}
+    return {
+        'version': __version__,
+        'parallel_read_safe': True,
+        'parallel_write_safe': True
+    }

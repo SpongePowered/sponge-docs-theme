@@ -70,4 +70,8 @@ def setup(app):
     # Register listener to set options when builder was initialized
     app.connect('builder-inited', init)
 
-    return {'version': __version__}
+    return {
+        'version': __version__,
+        'parallel_read_safe': True,
+        'parallel_write_safe': True
+    }

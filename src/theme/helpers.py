@@ -23,4 +23,8 @@ def setup_helpers(app, pagename, templatename, ctx, event_arg):
 
 def setup(app):
     app.connect('html-page-context', setup_helpers)
-    return {'version': __version__}
+    return {
+        'version': __version__,
+        'parallel_read_safe': True,
+        'parallel_write_safe': True
+    }
