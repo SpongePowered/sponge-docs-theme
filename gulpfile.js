@@ -1,7 +1,6 @@
 const
     gulp = require('gulp'),
     del = require('del'),
-    rename = require('gulp-rename'),
 
     svgmin = require('gulp-svgmin'),
 
@@ -41,7 +40,6 @@ gulp.task('theme:scripts', () =>
 gulp.task('theme:scss', () =>
     gulp.src('src/theme/scss/spongedocs.scss')
         .pipe(sass())
-        .pipe(rename({suffix: '.min'}))
         .pipe(cleanCSS())
         .pipe(gulp.dest('sponge_docs_theme/static/css'))
 );
@@ -49,7 +47,6 @@ gulp.task('theme:scss', () =>
 gulp.task('theme:js', () =>
     gulp.src('src/theme/js/*.js')
         .pipe(buble())
-        .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
         .pipe(gulp.dest('sponge_docs_theme/static/js'))
 );
@@ -98,7 +95,6 @@ gulp.task('homepage:html', ['homepage:load-data'], () =>
 gulp.task('homepage:scss', () =>
     gulp.src('src/homepage/scss/spongedocs.scss')
         .pipe(sass())
-        .pipe(rename({suffix: '.min'}))
         .pipe(cleanCSS())
         .pipe(gulp.dest('dist/homepage/_static/css'))
 );

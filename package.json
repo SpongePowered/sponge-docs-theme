@@ -11,7 +11,6 @@
     "gulp-clean-css": "^3.0.2",
     "gulp-htmlmin": "^3.0.0",
     "gulp-nunjucks-md": "^1.0.6",
-    "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-svgmin": "^1.2.3",
     "gulp-uglify": "^2.0.1",
