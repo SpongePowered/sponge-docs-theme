@@ -54,9 +54,7 @@ def setup(app):
     app.config.templates_path = [os.path.join(local_dir, 'templates')]
 
     # Set HTML theme to Sphinx ReadTheDocs theme
-    import sphinx_rtd_theme
     app.config.html_theme = 'sphinx_rtd_theme'
-    app.config.html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
     # Setup HTML context
     app.config.html_context = setup_html_context()
