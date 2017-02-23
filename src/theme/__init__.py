@@ -3,7 +3,9 @@ import os.path
 from sphinx.builders.html import StandaloneHTMLBuilder
 
 from .context import setup_html_context
-from .version import __version__
+
+VERSION = (0, 1, 8)
+__version__ = '.'.join(str(v) for v in VERSION)
 
 
 def strip_country(l):

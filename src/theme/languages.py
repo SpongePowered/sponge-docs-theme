@@ -4,7 +4,7 @@ import os.path
 import babel
 import requests
 
-from .version import __version__
+from . import __version__
 
 
 LOCAL_LANGUAGES_FILE = os.path.join(os.path.dirname(__file__), 'languages.json')

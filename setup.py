@@ -1,9 +1,9 @@
 from setuptools import setup
-from sponge_docs_theme.version import __version__
+import sponge_docs_theme
 
 setup(
     name='sponge-docs-theme',
-    version=__version__,
+    version=sponge_docs_theme.__version__,
     description='Theme for Sponge documentation',
     url='https://github.com/SpongePowered/sponge-docs-theme',
     author='SpongePowered',
