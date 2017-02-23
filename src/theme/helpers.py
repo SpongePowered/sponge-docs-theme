@@ -1,5 +1,5 @@
-from . import __version__
 from . import languages
+from .version import __version__
 
 
 def setup_helpers(app, pagename, templatename, ctx, event_arg):
