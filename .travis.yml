@@ -3,6 +3,10 @@ sudo: false
 language: node_js
 nodejs: 6
 
+install:
+  - npm install
+  - pip install --user babel
+
 script: npm run build
 
 notifications:

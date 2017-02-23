@@ -46,3 +46,13 @@ table p {
   // Reduce bottom margin
   margin-bottom: 12px;
 }
+
+.wy-alert-title a.fa {
+  float: right;
+  line-height: 24px;
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+  }
+}

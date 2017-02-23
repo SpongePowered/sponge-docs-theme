@@ -1,9 +1,14 @@
+import json
 import os.path
 
+from sphinx import locale
 from sphinx.builders.html import StandaloneHTMLBuilder
+from sphinx.util.osutil import copyfile
 
 from . import __version__
 from .context import setup_html_context
+
+PACKAGE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 def strip_country(l):
@@ -32,13 +37,54 @@ def init(app):
     if app.builder.name != 'html':
         return
 
-    # Workaround for https://github.com/sphinx-doc/sphinx/issues/2345
-    if app.config.language and '_' in app.config.language:
-        app.config.html_search_language = strip_country(app.config.language)
-
     # Trim whitespace in resulting HTML
     app.builder.templates.environment.trim_blocks = True
     app.builder.templates.environment.lstrip_blocks = True
+
+    if not app.config.language or app.config.language == 'en':
+        return
+
+    # Workaround for https://github.com/sphinx-doc/sphinx/issues/2345
+    if '_' in app.config.language:
+        app.config.html_search_language = strip_country(app.config.language)
+
+    # Add translations.js for our JavaScript translations
+    if '_static/translations.js' not in app.builder.script_files:
+        app.builder.script_files.append('_static/translations.js')
+
+    app.connect('build-finished', copy_js_translations)
+
+
+def copy_js_translations(app, exception):
+    if exception:
+        return
+
+    translator, has_translations = locale.init([os.path.join(app.srcdir, x) for x in app.config.locale_dirs],
+                                               app.config.language, 'theme')
+    # Append our translations to the file
+    with open(os.path.join(app.builder.outdir, '_static', 'translations.js'), 'a+t') as f:
+        if not has_translations:
+            return
+
+        translations = {}
+        for (key, translation) in translator._catalog.items():
+            if key and key != translation:
+                translations[key] = translation
+
+        app.info('Appending %d JavaScript translations' % len(translations))
+
+        # Append our translations
+        f.write('$.extend(Documentation.TRANSLATIONS, ')
+        json.dump(translations, f, sort_keys=True)
+        f.write(');')
+
+
+def finish(app, exception):
+    if exception or app.builder.name != 'gettext':
+        return
+
+    # Copy our JS theme translations
+    copyfile(os.path.join(PACKAGE_DIR, 'theme.pot'), os.path.join(app.builder.outdir, 'theme.pot'))
 
 
 def setup(app):
@@ -46,10 +92,8 @@ def setup(app):
     del app.builderclasses['html']
     app.add_builder(FixedHTMLBuilder)
 
-    local_dir = os.path.abspath(os.path.dirname(__file__))
-
     # Set templates path
-    app.config.templates_path = [os.path.join(local_dir, 'templates')]
+    app.config.templates_path = [os.path.join(PACKAGE_DIR, 'templates')]
 
     # Set HTML theme to Sphinx ReadTheDocs theme
     app.config.html_theme = 'sphinx_rtd_theme'
@@ -58,8 +102,9 @@ def setup(app):
     app.config.html_context = setup_html_context()
 
     # Set HTML static path and favicon
-    app.config.html_static_path = [os.path.join(local_dir, 'static')]
-    app.config.html_favicon = os.path.join(local_dir, 'favicon.ico')
+    app.config.html_static_path = [os.path.join(PACKAGE_DIR, 'static')]
+    app.config.html_favicon = os.path.join(PACKAGE_DIR, 'favicon.ico')
+    app.config.html_extra_path = [os.path.join(PACKAGE_DIR, 'extra')]
 
     # Load helper extensions for our theme
     app.setup_extension('sponge_docs_theme.languages')
@@ -67,6 +112,7 @@ def setup(app):
 
     # Register listener to set options when builder was initialized
     app.connect('builder-inited', init)
+    app.connect('build-finished', finish)
 
     return {
         'version': __version__,
