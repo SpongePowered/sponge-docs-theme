@@ -25,7 +25,8 @@ setup(
         'theme.pot',
         'templates/*.html',
         'static/*',
-        'static/*/*'
+        'static/*/*',
+        'extra/*'
     ]},
     scripts=[
         'dist/scripts/build-language',
