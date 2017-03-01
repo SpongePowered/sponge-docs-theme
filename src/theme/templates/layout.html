@@ -27,6 +27,15 @@
 {% endblock %}
 
 {% block extrahead %}
+    {# Additional options for mobile devices #}
+    <meta name="application-name" content="SpongeDocs">
+    <meta name="theme-color" content="#f7cf0d">
+    <link rel="manifest" href="{{ pathto('manifest.json', 1) }}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ pathto('_static/apple-touch-icon.png', 1) }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="SpongeDocs">
+
     {% if language == 'translate' %}
         {# Include Crowdin In-Context Localization JS app if this is the translation build #}
         <script>

@@ -18,6 +18,8 @@ const
     buble = require('gulp-buble'),
     uglify = require('gulp-uglify'),
 
+    jsonmin = require('gulp-jsonmin'),
+
     spawn = require('child_process').spawn,
 
     webserver = require('gulp-webserver');
@@ -28,6 +30,12 @@ gulp.task('clean', () => del(['sponge_docs_theme', 'dist', 'build']));
 gulp.task('theme:files', () =>
     gulp.src('src/theme/{*.*,{static,templates}/**}')
         .pipe(gulp.dest('sponge_docs_theme'))
+);
+
+gulp.task('theme:json', () =>
+    gulp.src('src/theme/json/**')
+        .pipe(jsonmin())
+        .pipe(gulp.dest('sponge_docs_theme/extra'))
 );
 
 gulp.task('theme:svg', () =>
@@ -88,11 +96,12 @@ gulp.task('theme:js:gettext', ['theme:files'],
     shell('babel', 'python', ['setup.py', 'extract_messages', '-o', 'sponge_docs_theme/theme.pot'])
 );
 
-gulp.task('theme:build', ['theme:files', 'theme:svg', 'theme:scripts', 'theme:scss',
+gulp.task('theme:build', ['theme:files', 'theme:json', 'theme:svg', 'theme:scripts', 'theme:scss',
     'theme:js', 'theme:js:lib', 'theme:js:worker', 'theme:js:gettext']);
 
 gulp.task('theme:watch', ['theme:build'], () => {
     gulp.watch('src/theme/{*.py,{static,templates}/**}', ['theme:files']);
+    gulp.watch('src/theme/json/**', ['theme:json']);
     gulp.watch('src/theme/svg/**', ['theme:svg']);
     gulp.watch('src/theme/scripts/**', ['theme:scripts']);
     gulp.watch('src/theme/scss/**', ['theme:scss']);
