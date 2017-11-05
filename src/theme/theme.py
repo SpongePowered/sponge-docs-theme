@@ -89,7 +89,7 @@ def finish(app, exception):
 
 def setup(app):
     # Workaround for https://github.com/sphinx-doc/sphinx/issues/2345
-    del app.builderclasses['html']
+    del app.registry.builders['html']
     app.add_builder(FixedHTMLBuilder)
 
     # Set templates path
