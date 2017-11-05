@@ -78,7 +78,9 @@ gulp.task('theme:js:worker', () =>
 gulp.task('theme:js:lib', () =>
     gulp.src('src/theme/js/lib/*.js')
         .pipe(uglify({
-            preserveComments: 'license'
+            output: {
+                comments: 'some'
+            }
         }))
         .pipe(gulp.dest('sponge_docs_theme/static'))
 );

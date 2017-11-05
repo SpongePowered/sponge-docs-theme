@@ -2,10 +2,10 @@
   "name": "sponge-docs-theme",
   "private": true,
   "devDependencies": {
-    "cldr-core": "^30.0.3",
-    "cldr-localenames-modern": "^30.0.3",
-    "cldrjs": "^0.4.8",
-    "del": "^2.2.2",
+    "cldr-core": "^31.0.1",
+    "cldr-localenames-modern": "^31.0.1",
+    "cldrjs": "^0.5.0",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-buble": "^0.8.0",
     "gulp-clean-css": "^3.0.2",
@@ -14,7 +14,7 @@
     "gulp-nunjucks-md": "^1.0.6",
     "gulp-sass": "^3.1.0",
     "gulp-svgmin": "^1.2.3",
-    "gulp-uglify": "^2.0.1",
+    "gulp-uglify": "^3.0.0",
     "gulp-webserver": "^0.9.1",
     "request": "^2.79.0",
     "request-promise-native": "^1.0.3"
