@@ -12,6 +12,8 @@ const
 
     // CSS
     sass = require('gulp-sass'),
+    postcss = require('gulp-postcss'),
+    autoprefixer = require('autoprefixer'),
     cleanCSS = require('gulp-clean-css'),
 
     // JavaScript
@@ -44,6 +46,7 @@ gulp.task('theme:scripts', () =>
 gulp.task('theme:scss', () =>
     gulp.src('src/theme/scss/spongedocs.scss')
         .pipe(sass())
+        .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS())
         .pipe(gulp.dest('sponge_docs_theme/static'))
 );
@@ -136,6 +139,7 @@ gulp.task('homepage:html', ['homepage:load-data'], () =>
 gulp.task('homepage:scss', () =>
     gulp.src('src/homepage/scss/spongedocs.scss')
         .pipe(sass())
+        .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS())
         .pipe(gulp.dest('dist/homepage/_static/css'))
 );

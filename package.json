@@ -2,6 +2,7 @@
   "name": "sponge-docs-theme",
   "private": true,
   "devDependencies": {
+    "autoprefixer": "^7.1.6",
     "cldr-core": "^31.0.1",
     "cldr-localenames-modern": "^31.0.1",
     "cldrjs": "^0.5.0",
@@ -12,6 +13,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-htmlmin": "^3.0.0",
     "gulp-nunjucks-md": "^1.0.6",
+    "gulp-postcss": "^7.0.0",
     "gulp-sass": "^3.1.0",
     "gulp-svgmin": "^1.2.3",
     "gulp-uglify": "^3.0.0",
