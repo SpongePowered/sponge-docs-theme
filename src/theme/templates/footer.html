@@ -1,0 +1,22 @@
+<footer>
+    {% if next or prev %}
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        {% if next %}
+        <a href="{{ next.link|e }}" class="btn btn-neutral float-right" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ _('Next') }} <span class="fa fa-angle-right"></span></a>
+        {% endif %}
+        {% if prev %}
+        <a href="{{ prev.link|e }}" class="btn btn-neutral" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"><span class="fa fa-angle-left"></span> {{ _('Previous') }}</a>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <hr/>
+
+    <section id="license">
+        <p>Except where otherwise noted,
+            <a xmlns:dct="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#" property="dct:title" rel="cc:attributionURL" href="https://github.com/SpongePowered/SpongeDocs">SpongeDocs</a>
+            is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        </p>
+        <a id="license-icons" rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" title="CC-BY-SA" aria-hidden="true">cba</a>
+    </section>
+</footer>

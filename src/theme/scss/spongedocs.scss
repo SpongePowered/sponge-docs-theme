@@ -1,4 +1,5 @@
 @import "montserrat";
+@import "cc_icons";
 
 @import "navbar";
 @import "code_tomorrow_night";
@@ -54,5 +55,48 @@ table p {
 
   &:hover {
     color: inherit;
+  }
+}
+
+// Increase space between icon and text in footer navigation buttons
+.rst-footer-buttons {
+  .fa-angle-right {
+    margin-left: 2px;
+  }
+  .fa-angle-left {
+    margin-right: 2px;
+  }
+}
+
+#license-icons {
+  display: block;
+
+  font-family: 'CC Icons';
+  font-size: 40px;
+  letter-spacing: 5px;
+  text-align: center;
+  user-select: none;
+
+  &, &:active, &:visited {
+    color: #333333;
+  }
+
+  &:hover {
+    color: $sponge_yellow;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  #license {
+    display: table;
+
+    > * {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+
+  #license-icons {
+    padding-left: 15px;
   }
 }
