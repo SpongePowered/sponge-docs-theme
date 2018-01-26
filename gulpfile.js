@@ -117,10 +117,7 @@ gulp.task('homepage:load-data', () =>
 
 gulp.task('homepage:html', ['homepage:load-data'], () =>
     gulp.src('src/homepage/html/*.html')
-        .pipe(nunjucks.compile({
-            path: 'src/homepage/html',
-            data: renderData
-        }))
+        .pipe(nunjucks.compile(renderData))
         .pipe(htmlmin({
             collapseBooleanAttributes: true,
             collapseWhitespace: true,
