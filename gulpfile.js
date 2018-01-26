@@ -7,7 +7,7 @@ const
     svgmin = require('gulp-svgmin'),
 
     // HTML
-    nunjucksRender = require('gulp-nunjucks-md'),
+    nunjucks = require('gulp-nunjucks'),
     htmlmin = require('gulp-htmlmin'),
 
     // CSS
@@ -117,7 +117,7 @@ gulp.task('homepage:load-data', () =>
 
 gulp.task('homepage:html', ['homepage:load-data'], () =>
     gulp.src('src/homepage/html/*.html')
-        .pipe(nunjucksRender({
+        .pipe(nunjucks.compile({
             path: 'src/homepage/html',
             data: renderData
         }))
