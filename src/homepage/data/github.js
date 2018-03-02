@@ -8,6 +8,9 @@ if (githubUser && githubToken) {
     const githubRepo = 'SpongeDocs';
 
     module.exports.getVersions = () =>
+        /* We only check branches here and not tags, because the old,
+         * unmaintained versions, likely have different languages available than
+         * the stable builds. This would result in broken links. */
         rp({
             url: `https://api.github.com/repos/${githubOwner}/${githubRepo}/branches`,
             headers: {
