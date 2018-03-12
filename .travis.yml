@@ -1,7 +1,7 @@
 sudo: false
 
 language: node_js
-nodejs: 6
+nodejs: lts/*
 
 install:
   - npm install
