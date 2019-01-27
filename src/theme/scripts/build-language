@@ -19,6 +19,9 @@ sphinx-build -q -D "language=$LOCALE" -d "build/$LOCALE/doctrees" source "$dist_
 # Replace working directory in log file
 sed -i "s@$PWD/source/@@g" "$dist_dir/build-log.txt"
 
+# Append build timestamp
+echo "Build completed: $(date -u +"%Y-%m-%d %H:%M:%S")" >> "$dist_dir/build-log.txt"
+
 echo "Building ZIP for $LANGUAGE_CODE..."
 cd "$dist_dir"
 zip -9 -q -r "$HTML_DOWNLOAD" .
