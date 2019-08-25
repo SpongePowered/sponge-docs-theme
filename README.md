@@ -38,3 +38,14 @@ To test the changes, setup a [SpongeDocs](https://github.com/SpongePowered/Spong
 #### Homepage
 The homepage can be built using `gulp homepage:build`. Run `gulp homepage` to listen for local changes and to start a
 webserver at http://localhost:8000.
+
+## Release Procedure
+1. Update `VERSION` in `src/theme/__init__.py`
+2. Create a tag for the new version
+3.
+    ```
+    gulp clean
+    gulp theme:build
+    python setup.py sdist bdist_wheel
+    twine upload dist/*.* --sign
+    ```
