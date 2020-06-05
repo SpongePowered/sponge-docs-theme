@@ -95,16 +95,16 @@ function themeJSgetText() {
     return shell('babel', 'python', ['setup.py', 'extract_messages', '-o', 'sponge_docs_theme/theme.pot']);
 }
 
-function watch() {
+const themeBuild = gulp.series(themeFiles, themeSVG, themeScripts, themeScss, themeJS, themeJSLib, themeJSWorker, themeJSgetText);
+
+const watch = gulp.series(themeBuild, function watch() {
     gulp.watch('src/theme/{*.py,{static,templates}/**}', themeFiles);
     gulp.watch('src/theme/svg/**', themeSVG);
     gulp.watch('src/theme/scripts/**', themeScripts);
     gulp.watch('src/theme/scss/**', themeScss);
     gulp.watch('src/theme/js/*.js', gulp.series(themeJS, themeJSgetText));
     gulp.watch('src/theme/js/offline/worker.js', themeJSWorker);
-}
-
-const themeBuild = gulp.series(themeFiles, themeSVG, themeScripts, themeScss, themeJS, themeJSLib, themeJSWorker, themeJSgetText);
+});
 
 exports.theme = themeBuild;
 exports.clean = clean;
@@ -150,12 +150,12 @@ function homepageScss() {
         .pipe(gulp.dest('dist/homepage/_static/css'));
 }
 
-function homepageWatch() {
+const homepageBuild = gulp.series(homepageHTML, homepageScss);
+
+const homepageWatch = gulp.series(homepageBuild, function homepageWatch() {
     gulp.watch('src/homepage/html/**', homepageHTML);
     gulp.watch('src/homepage/scss/**', homepageScss);
-}
-
-const homepageBuild = gulp.series(homepageHTML, homepageScss);
+});
 
 exports['homepage:build'] = homepageBuild;
 exports['homepage:watch'] = homepageWatch;
