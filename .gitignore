@@ -194,4 +194,3 @@ jspm_packages
 ### sponge-docs-theme ###
 sponge_docs_theme
 !**/js/lib/
-package-lock.json
