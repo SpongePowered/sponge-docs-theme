@@ -3,6 +3,7 @@ import os.path
 
 from sphinx import locale
 from sphinx.builders.html import StandaloneHTMLBuilder
+from sphinx.util import logging
 from sphinx.util.osutil import copyfile
 
 from . import __version__
@@ -71,7 +72,7 @@ def copy_js_translations(app, exception):
             if key and key != translation:
                 translations[key] = translation
 
-        app.info('Appending %d JavaScript translations' % len(translations))
+        logging.getLogger(__name__).info('Appending %d JavaScript translations' % len(translations))
 
         # Append our translations
         f.write('$.extend(Documentation.TRANSLATIONS, ')
