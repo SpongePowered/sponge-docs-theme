@@ -2,11 +2,10 @@ sudo: false
 
 language: node_js
 nodejs: lts/*
-python: 3.8
 
 install:
   - npm install
-  - pip install --user -r requirements.txt
+  - pip3 install --user -r requirements.txt
 
 script: npm run build
 
