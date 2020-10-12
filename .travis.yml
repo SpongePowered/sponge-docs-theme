@@ -1,9 +1,7 @@
-sudo: false
-
-language: node_js
-nodejs: lts/*
+language: python
 python:
   - "3.8"
+nodejs: lts/*
 
 install:
   - npm install
