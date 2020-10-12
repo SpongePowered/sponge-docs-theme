@@ -3,9 +3,9 @@ import os.path
 
 import babel
 import requests
+from sphinx.util import logging
 
 from . import __version__
-
 
 LOCAL_LANGUAGES_FILE = os.path.join(os.path.dirname(__file__), 'languages.json')
 LANGUAGES_FILE = 'build/languages.json'
@@ -82,9 +82,9 @@ def init(app):
     if not app.config.language:
         return
 
-    app.info('Loading languages...')
+    logging.getLogger(__name__).info('Loading languages...')
     load_languages()
-    app.info('%d languages loaded' % len(languages))
+    logging.getLogger(__name__).info('%d languages loaded' % len(languages))
 
 
 # This is the entry point if this module is loaded as a Sphinx extension

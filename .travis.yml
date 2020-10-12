@@ -1,11 +1,12 @@
-sudo: false
-
-language: node_js
-nodejs: lts/*
+language: python
+python:
+  - "3.8"
+env:
+  TRAVIS_NODE_VERSION: lts/*
 
 install:
   - npm install
-  - pip install --user -r requirements.txt
+  - pip3 install -r requirements.txt
 
 script: npm run build
 

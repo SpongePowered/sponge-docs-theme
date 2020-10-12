@@ -1,1 +1,2 @@
 babel
+sphinx>=3.2.1
