@@ -1,11 +1,12 @@
 language: python
 python:
   - "3.8"
-nodejs: lts/*
+env:
+  TRAVIS_NODE_VERSION: lts/*
 
 install:
   - npm install
-  - pip3 install --user -r requirements.txt
+  - pip3 install -r requirements.txt
 
 script: npm run build
 
