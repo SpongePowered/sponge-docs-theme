@@ -89,7 +89,7 @@ jobs:
           ./node_modules/.bin/gulp clean
           ./node_modules/.bin/gulp theme:build
     - name: Setup for publishing
-      run: python setup-py sdist bdist_wheel
+      run: python setup.py sdist bdist_wheel
     - name: Publish
       run: twine upload dist/*.*
       env:
