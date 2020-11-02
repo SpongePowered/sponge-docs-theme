@@ -14,7 +14,7 @@ export HTML_DOWNLOAD="spongedocs-$VERSION-$LANGUAGE_CODE.zip"
 
 # Build HTML docs
 echo "Building page for $LANGUAGE_CODE..."
-sphinx-build -q -D "language=$LOCALE" -d "build/$LOCALE/doctrees" source "$dist_dir" > "$dist_dir/build-log.txt" 2>&1
+sphinx-build -q -D "language=$LOCALE" -d "build/$LOCALE/doctrees" source "$dist_dir" -w "$dist_dir/build-log.txt"
 
 # Replace working directory in log file
 sed -i "s@$PWD/source/@@g" "$dist_dir/build-log.txt"
