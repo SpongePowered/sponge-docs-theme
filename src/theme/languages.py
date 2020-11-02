@@ -44,13 +44,13 @@ def load_languages():
             languages = json.load(f)
     else:
         # Load Crowdin languages from API
-        r = requests.get('https://api.crowdin.com/api/supported-languages?json')
+        r = requests.get('https://api.crowdin.com/api/v2/languages?limit=500')
         r.raise_for_status()
 
-        languages = {lang['locale'].replace('-', '_'): {
-            'name': lang['name'],
-            'code': lang['crowdin_code']
-        } for lang in r.json()}
+        languages = {lang['data']['locale'].replace('-', '_'): {
+            'name': lang['data']['name'],
+            'code': lang['data']['id']
+        } for lang in r.json()['data']}
 
         # Load locale data
         with open(LOCAL_LANGUAGES_FILE, 'r') as f:
