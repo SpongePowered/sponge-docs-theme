@@ -4,29 +4,31 @@ import os
 import requests
 import sys
 
-PROJECT_IDENTIFIER = 'sponge-docs'
-CROWDIN_API_KEY = os.environ['CROWDIN_API_KEY']
+CROWDIN_PROJECT_ID = os.environ['CROWDIN_PROJECT_ID']
+CROWDIN_TOKEN = os.environ['CROWDIN_TOKEN']
+
+headers = {
+    'Authorization': 'Bearer ' + CROWDIN_TOKEN,
+    'Accept': 'application/json'
+}
 
 # Load language mappings
-r = requests.get('https://api.crowdin.com/api/supported-languages?json')
+r = requests.get('https://api.crowdin.com/api/v2/languages?limit=500')
 r.raise_for_status()
 
 # Map Crowdin codes to locale codes
-languages = {lang['crowdin_code']: lang['locale'].replace('-', '_') for lang in r.json()}
+languages = {lang['data']['id']: lang['data']['locale'].replace('-', '_') for lang in r.json()['data']}
 
-r = requests.get('https://api.crowdin.com/api/project/%s/status' % PROJECT_IDENTIFIER, params={
-    'key': CROWDIN_API_KEY,
-    'json': True
-})
+r = requests.get('https://api.crowdin.com/api/v2/projects/%s/languages/progress?limit=500' % CROWDIN_PROJECT_ID, headers=headers)
 r.raise_for_status()
 
 locales = []
-for language in r.json():
+for language in r.json()['data']:
     # Include only languages with at least 5% progress
-    if language['translated_progress'] >= 5 or language['code'].startswith('en-'):
-        locales.append(languages[language['code']])
+    if language['data']['translationProgress'] >= 5 or language['data']['languageId'].startswith('en-'):
+        locales.append(languages[language['data']['languageId']])
     else:
-        print("Skipping %s with %d%% completion" % (language['name'], language['translated_progress']), file=sys.stderr)
+        print("Skipping %s with %d%% completion" % (language['data']['languageId'], language['data']['translationProgress']), file=sys.stderr)
 
 # Sort locales
 locales.sort()
