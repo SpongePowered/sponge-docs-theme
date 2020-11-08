@@ -114,7 +114,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: felixoi/sponge-docs-theme:latest
+        tags: ghcr.io/felixoi/sponge-docs-theme:latest
         build-args: |
           GITHUB_USER=${{ github.actor }}
           GITHUB_TOKEN=${{ github.token }}
