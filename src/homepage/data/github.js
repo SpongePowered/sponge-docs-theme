@@ -11,32 +11,35 @@ if (githubUser && githubToken) {
         /* We only check branches here and not tags, because the old,
          * unmaintained versions, likely have different languages available than
          * the stable builds. This would result in broken links. */
-        rp({
-            url: `https://api.github.com/repos/${githubOwner}/${githubRepo}/branches`,
-            headers: {
-                'User-Agent': 'SpongeDocsHomepage'
-            },
-            auth: {
-                user: githubUser,
-                pass: githubToken
-            },
-            json: true
-        }).then(branches => {
-            const versions = [];
+        new Promise(((resolve, reject) => {
+            rp({
+                url: `https://api.github.com/repos/${githubOwner}/${githubRepo}/branches`,
+                headers: {
+                    'User-Agent': 'SpongeDocsHomepage'
+                },
+                auth: {
+                    user: githubUser,
+                    pass: githubToken
+                },
+                json: true
+            }).then(branches => {
+                const versions = [];
 
-            for (branch of branches) {
-                if (branch.name === 'stable') {
-                    versions.push('stable');
-                } else if (branch.name.startsWith('release-')) {
-                    versions.push(branch.name.substring(8))
+                for (branch of branches) {
+                    if (branch.name === 'stable') {
+                        versions.push('stable');
+                    } else if (branch.name.startsWith('release-')) {
+                        versions.push(branch.name.substring(8))
+                    }
                 }
-            }
 
-            // Sort versions in reversed order
-            versions.sort().reverse();
+                // Sort versions in reversed order
+                versions.sort().reverse();
 
-            return versions;
-        });
+                resolve(versions);
+            }).catch(err => reject(err));
+        }))
+
 } else {
     console.warn("GITHUB_USER and GITHUB_TOKEN is not set; using local test versions");
 

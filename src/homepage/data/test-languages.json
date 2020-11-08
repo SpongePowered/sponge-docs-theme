@@ -1,82 +1,128 @@
-[
-  {
-    "name": "Danish",
-    "code": "da"
-  },
-  {
-    "name": "German",
-    "code": "de"
-  },
-  {
-    "name": "English, United Kingdom",
-    "code": "en-GB"
-  },
-  {
-    "name": "Pirate English",
-    "code": "en-PT"
-  },
-  {
-    "name": "Spanish",
-    "code": "es"
-  },
-  {
-    "name": "Finnish",
-    "code": "fi"
-  },
-  {
-    "name": "French",
-    "code": "fr"
-  },
-  {
-    "name": "Italian",
-    "code": "it"
-  },
-  {
-    "name": "Japanese",
-    "code": "ja"
-  },
-  {
-    "name": "Korean",
-    "code": "ko"
-  },
-  {
-    "name": "Lithuanian",
-    "code": "lt"
-  },
-  {
-    "name": "Norwegian Bokmal",
-    "code": "nb"
-  },
-  {
-    "name": "Dutch",
-    "code": "nl"
-  },
-  {
-    "name": "Polish",
-    "code": "pl"
-  },
-  {
-    "name": "Portuguese",
-    "code": "pt"
-  },
-  {
-    "name": "Portuguese, Brazilian",
-    "code": "pt-BR"
-  },
-  {
-    "name": "Russian",
-    "code": "ru"
-  },
-  {
-    "name": "Ukrainian",
-    "code": "uk"
-  },
-  {
-    "name": "Chinese Simplified",
-    "code": "zh-CN"
-  },
-  {
-    "name": "Chinese Traditional",
-    "code": "zh-TW"
-  }
-]
+{
+  "stable": [
+    {
+      "name": "Danish",
+      "id": "da"
+    },
+    {
+      "name": "German",
+      "id": "de"
+    },
+    {
+      "name": "English, United Kingdom",
+      "id": "en-GB"
+    },
+    {
+      "name": "Pirate English",
+      "id": "en-PT"
+    },
+    {
+      "name": "Spanish",
+      "id": "es"
+    },
+    {
+      "name": "Finnish",
+      "id": "fi"
+    },
+    {
+      "name": "French",
+      "id": "fr"
+    },
+    {
+      "name": "Italian",
+      "id": "it"
+    },
+    {
+      "name": "Japanese",
+      "id": "ja"
+    },
+    {
+      "name": "Korean",
+      "id": "ko"
+    },
+    {
+      "name": "Lithuanian",
+      "id": "lt"
+    },
+    {
+      "name": "Norwegian Bokmal",
+      "id": "nb"
+    },
+    {
+      "name": "Dutch",
+      "id": "nl"
+    },
+    {
+      "name": "Polish",
+      "id": "pl"
+    },
+    {
+      "name": "Portuguese",
+      "id": "pt"
+    },
+    {
+      "name": "Portuguese, Brazilian",
+      "id": "pt-BR"
+    },
+    {
+      "name": "Russian",
+      "id": "ru"
+    },
+    {
+      "name": "Ukrainian",
+      "id": "uk"
+    },
+    {
+      "name": "Chinese Simplified",
+      "id": "zh-CN"
+    },
+    {
+      "name": "Chinese Traditional",
+      "id": "zh-TW"
+    }
+  ],
+  "4.1.0": [
+    {
+      "name": "Danish",
+      "id": "da"
+    },
+    {
+      "name": "German",
+      "id": "de"
+    },
+    {
+      "name": "English, United Kingdom",
+      "id": "en-GB"
+    },
+    {
+      "name": "Pirate English",
+      "id": "en-PT"
+    },
+    {
+      "name": "Spanish",
+      "id": "es"
+    },
+    {
+      "name": "Finnish",
+      "id": "fi"
+    },
+    {
+      "name": "French",
+      "id": "fr"
+    }
+  ],
+  "3.1.0": [
+    {
+      "name": "Danish",
+      "id": "da"
+    },
+    {
+      "name": "German",
+      "id": "de"
+    },
+    {
+      "name": "English, United Kingdom",
+      "id": "en-GB"
+    }
+  ]
+}
