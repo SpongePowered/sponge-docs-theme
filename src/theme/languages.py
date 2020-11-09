@@ -22,17 +22,19 @@ def get_language_display_name(locale_code):
     # Compute display name if not already cached
     if 'display_name' not in lang:
         try:
+            if 'locale' not in lang:
+                print("Errored: " + lang)
             locale = babel.Locale.parse(lang['locale'], sep='-')
 
             if locale.script:
-               # If we have a script (e.g. Simplified for Chinese) then we
-               # don't need the territory additionally (e.g. China)
-               locale.territory = None
+                # If we have a script (e.g. Simplified for Chinese) then we
+                # don't need the territory additionally (e.g. China)
+                locale.territory = None
 
             try:
-              lang['display_name'] = locale.languages[locale_code].title()
+                lang['display_name'] = locale.languages[locale_code].title()
             except KeyError:
-              lang['display_name'] = locale.language_name.title()
+                lang['display_name'] = locale.language_name.title()
         except babel.UnknownLocaleError:
             lang['display_name'] = lang['name']
 
