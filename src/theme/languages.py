@@ -23,7 +23,8 @@ def get_language_display_name(locale_code):
     if 'display_name' not in lang:
         try:
             if 'locale' not in lang:
-                print("Errored: " + lang)
+                print("Errored: ")
+                print(lang)
             locale = babel.Locale.parse(lang['locale'], sep='-')
 
             if locale.script:

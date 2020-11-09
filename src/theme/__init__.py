@@ -1,4 +1,4 @@
-VERSION = (0, 4, 11)
+VERSION = (0, 4, 12)
 __version__ = '.'.join(str(v) for v in VERSION)
 
 
