@@ -22,18 +22,21 @@ def get_language_display_name(locale_code):
     # Compute display name if not already cached
     if 'display_name' not in lang:
         try:
-            locale = babel.Locale.parse(lang['code'], sep='-')
-            if locale.script:
-                # If we have a script (e.g. Simplified for Chinese) then we
-                # don't need the territory additionally (e.g. China)
-                locale.territory = None
+            locale = babel.Locale.parse(lang['locale'], sep='-')
 
-            lang['display_name'] = locale.languages[str(locale)].title()
+            if locale.script:
+               # If we have a script (e.g. Simplified for Chinese) then we
+               # don't need the territory additionally (e.g. China)
+               locale.territory = None
+
+            try:
+              lang['display_name'] = locale.languages[locale_code].title()
+            except KeyError:
+              lang['display_name'] = locale.language_name.title()
         except babel.UnknownLocaleError:
             lang['display_name'] = lang['name']
 
     return lang['display_name']
-
 
 def load_languages():
     global languages
@@ -49,7 +52,8 @@ def load_languages():
 
         languages = {lang['data']['locale'].replace('-', '_'): {
             'name': lang['data']['name'],
-            'code': lang['data']['id']
+            'code': lang['data']['id'],
+            'locale': lang['data']['locale']
         } for lang in r.json()['data']}
 
         # Load locale data
