@@ -28,8 +28,7 @@ for language in r.json()['data']:
     if language['data']['name'] == BRANCH:
         branchId = language['data']['id']
 if not branchId:
-    print("Could not find specified branch!")
-    exit(1)
+    sys.exit(f"Could not find specified branch: ${branchId}!")
 
 r = requests.get('https://api.crowdin.com/api/v2/projects/%s/branches/%s/languages/progress' %
                  (CROWDIN_PROJECT_ID, branchId), headers=headers)
