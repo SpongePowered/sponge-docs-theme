@@ -11,6 +11,7 @@
   },
   "translate": {
     "name": "Translate",
-    "code": "translate"
+    "code": "translate",
+    "locale": "translate"
   }
 }
