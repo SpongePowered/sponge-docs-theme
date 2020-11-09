@@ -1,7 +1,8 @@
 {
   "en": {
     "name": "English",
-    "code": "en"
+    "code": "en",
+    "locale": "en-US"
   },
   "es_ES": {
     "code": "es"
