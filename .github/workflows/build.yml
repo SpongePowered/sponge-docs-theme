@@ -104,13 +104,6 @@ jobs:
       uses: docker/setup-qemu-action@v1
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
-    - name: Cache Docker layers
-      uses: actions/cache@v2
-      with:
-        path: /tmp/.buildx-cache
-        key: ${{ runner.os }}-buildx-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-buildx-
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
@@ -128,5 +121,3 @@ jobs:
           CROWDIN_TOKEN=${{ secrets.CROWDIN_TOKEN }}
           CROWDIN_PROJECT_ID=${{ secrets.CROWDIN_PROJECT_ID }}
           BASE_URL=https://docs.spongepowered.org
-        cache-from: type=local,src=/tmp/.buildx-cache
-        cache-to: type=local,dest=/tmp/.buildx-cache
