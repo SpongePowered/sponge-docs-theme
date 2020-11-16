@@ -105,7 +105,7 @@ jobs:
       id: docker_meta
       uses: crazy-max/ghaction-docker-meta@v1
       with:
-        images: repo-new.spongepowered.org/sponge-docs-theme
+        images: repo-new.spongepowered.org/repository/sponge-docker/sponge-docs-theme
         tag-match: \d{1,3}.\d{1,3}.\d{1,3}
         tag-match-group: 0
     - name: Set up QEMU
