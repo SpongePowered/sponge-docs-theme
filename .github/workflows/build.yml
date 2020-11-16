@@ -115,7 +115,7 @@ jobs:
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
-        registry: repo-new.spongepowered.org
+        registry: repo-new.spongepowered.org/repository/sponge-docker
         username: ${{ secrets.SPONGE_MAVEN_REPO_USER }}
         password: ${{ secrets.SPONGE_MAVEN_REPO_PASSWORD }}
     - name: Build and push
