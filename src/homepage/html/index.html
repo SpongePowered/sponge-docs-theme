@@ -15,10 +15,10 @@
     </header>
 
     <section class="row languages">
-        {% for language in languages %}
+        {% for language in languages[mainVersion] %}
             <div class="col-xs-6 col-sm-4 col-md-3">
-                <a href="/{{ mainVersion }}/{{ language.code }}/">
-                    <img src="https://docs.spongepowered.org/{{ mainVersion }}/en/_static/flags/{{ language.localeCode }}.svg">
+                <a href="/{{ mainVersion }}/{{ language.id }}/">
+                    <img src="{{ baseUrl }}/{{ mainVersion }}/en/_static/flags/{{ language.locale }}.svg">
                     <p>{{ language.displayName }}</p>
                 </a>
             </div>
@@ -29,11 +29,13 @@
 
     {% for version in versions %}
         <section class="row old-version">
-            <h3>{{ version }}</h3>
-            {% for language in languages %}
+            <div class="col-xs-12">
+                <h3>{{ version }}</h3>
+            </div>
+            {% for language in languages[version] %}
                 <div class="col-xs-2 col-md-1">
-                    <a href="/{{ version }}/{{ language.code }}/">
-                        <img src="https://docs.spongepowered.org/{{ mainVersion }}/en/_static/flags/{{ language.localeCode }}.svg">
+                    <a href="/{{ version }}/{{ language.id }}/">
+                        <img src="{{ baseUrl }}/{{ mainVersion }}/en/_static/flags/{{ language.locale }}.svg">
                     </a>
                 </div>
             {% endfor %}

@@ -7,6 +7,8 @@ import sys
 CROWDIN_PROJECT_ID = os.environ['CROWDIN_PROJECT_ID']
 CROWDIN_TOKEN = os.environ['CROWDIN_TOKEN']
 
+BRANCH = sys.argv[1]
+
 headers = {
     'Authorization': 'Bearer ' + CROWDIN_TOKEN,
     'Accept': 'application/json'
@@ -19,7 +21,17 @@ r.raise_for_status()
 # Map Crowdin codes to locale codes
 languages = {lang['data']['id']: lang['data']['locale'].replace('-', '_') for lang in r.json()['data']}
 
-r = requests.get('https://api.crowdin.com/api/v2/projects/%s/languages/progress?limit=500' % CROWDIN_PROJECT_ID, headers=headers)
+branchId = None
+r = requests.get('https://api.crowdin.com/api/v2/projects/%s/branches' % CROWDIN_PROJECT_ID, headers=headers)
+r.raise_for_status()
+for language in r.json()['data']:
+    if language['data']['name'] == BRANCH:
+        branchId = language['data']['id']
+if not branchId:
+    sys.exit(f"Could not find specified branch: ${branchId}!")
+
+r = requests.get('https://api.crowdin.com/api/v2/projects/%s/branches/%s/languages/progress' %
+                 (CROWDIN_PROJECT_ID, branchId), headers=headers)
 r.raise_for_status()
 
 locales = []
@@ -28,7 +40,8 @@ for language in r.json()['data']:
     if language['data']['translationProgress'] >= 5 or language['data']['languageId'].startswith('en-'):
         locales.append(languages[language['data']['languageId']])
     else:
-        print("Skipping %s with %d%% completion" % (language['data']['languageId'], language['data']['translationProgress']), file=sys.stderr)
+        print("Skipping %s with %d%% completion" %
+              (language['data']['languageId'], language['data']['translationProgress']), file=sys.stderr)
 
 # Sort locales
 locales.sort()

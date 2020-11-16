@@ -36,7 +36,10 @@ module.exports.load = () =>
 
             // Load all bundles
             for (locale of require('cldr-core/availableLocales').availableLocales.modern) {
-                Cldr.load(require(`cldr-localenames-modern/main/${locale}/languages`))
+                // TODO: Remove this when cldr-localenames-modern gets a fix
+                if(locale !== "ms-ID" && locale !== "sd-Arab") {
+                    Cldr.load(require(`cldr-localenames-modern/main/${locale}/languages`))
+                }
             }
 
             resolve(new CldrLanguages(Cldr))
