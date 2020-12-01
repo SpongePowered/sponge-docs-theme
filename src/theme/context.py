@@ -6,6 +6,16 @@ def _split_environment_variable(name):
     return value and value.split()
 
 
+def build_locale_map():
+    locales = {}
+    for k, v in os.environ.items():
+        if not k.startswith("LOCALES_"):
+            continue
+        k = k[len("LOCALES_"):].replace('_', '.')
+        locales[k.lower()] = v.split()
+    return locales
+
+
 def setup_html_context():
     github_user = os.environ.get('GITHUB_USER')
     github_repo = os.environ.get('GITHUB_REPO')
@@ -16,7 +26,7 @@ def setup_html_context():
         'conf_py_path': '/source/',
 
         # List of supported languages
-        'locales': _split_environment_variable('LOCALES'),
+        'locales': build_locale_map(),
 
         # Current version and list of documented versions
         'current_version': os.environ.get('VERSION'),

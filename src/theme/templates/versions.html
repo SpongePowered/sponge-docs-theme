@@ -17,10 +17,10 @@
     <div id="versions" class="rst-other-versions">
 
         {# Languages #}
-        {% if locales %}
+        {% if locales[current_version] %}
             <dl id="languages">
                 <dt>{% trans %}Languages{% endtrans %}</dt>
-                {% for locale in locales %}
+                {% for locale in locales[current_version] %}
                     {% if locale != 'translate' %}
                         <dd><a href="{{ page_link(language=locale) }}">{{ language_flag(locale) }}</a></dd>
                     {% endif %}
@@ -33,8 +33,15 @@
             <dl>
                 <dt>{% trans %}Versions{% endtrans %}</dt>
                 {% for version in versions %}
-                    <dd><a {{ mark_current(version, current_version) }}
-                            href="{{ page_link(version=version) }}">{{ version }}</a></dd>
+                    <dd>
+                        {%  if language and language in locales[version] %}
+                        <a {{ mark_current(version, current_version) }}
+                            href="{{ page_link(version=version) }}">{{ version }}
+                        </a>
+                        {% else %}
+                        <a href="{{ page_link(version=version, language="en") }}">{{ version }} (en)</a>
+                        {% endif %}
+                    </dd>
                 {% endfor %}
             </dl>
         {% endif %}
@@ -48,14 +55,14 @@
         {% endif %}
 
         {# Contribute #}
-        {% if github_page_link or (locales and 'translate' in locales) %}
+        {% if github_page_link or (locales and 'translate' in locales[current_version]) %}
             <dl>
                 <dt>{% trans %}Contribute{% endtrans %}</dt>
                 {% if github_page_link %}
                     <dd><a href="{{ github_page_link() }}">{{ _("Source") }}</a></dd>
                     <dd><a href="{{ github_page_link('edit') }}">{{ _("Edit") }}</a></dd>
                 {% endif %}
-                {% if locales and 'translate' in locales %}
+                {% if locales and 'translate' in locales[current_version] %}
                     <dd><a href="{{ page_link(language='translate') }}">{{ _("Translate") }}</a></dd>
                 {% endif %}
             </dl>

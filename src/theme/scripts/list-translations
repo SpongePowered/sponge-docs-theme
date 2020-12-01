@@ -40,8 +40,8 @@ for language in r.json()['data']:
     if language['data']['translationProgress'] >= 5 or language['data']['languageId'].startswith('en-'):
         locales.append(languages[language['data']['languageId']])
     else:
-        print("Skipping %s with %d%% completion" %
-              (language['data']['languageId'], language['data']['translationProgress']), file=sys.stderr)
+        print("[%s] Skipping %s with %d%% completion" %
+              (branchId, language['data']['languageId'], language['data']['translationProgress']), file=sys.stderr)
 
 # Sort locales
 locales.sort()
