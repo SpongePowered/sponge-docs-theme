@@ -1,2 +1,2 @@
-babel
+babel>=2.9.0
 sphinx>=3.2.1
