@@ -32,11 +32,9 @@
         {% if versions %}
             <dl>
                 <dt>{% trans %}Versions{% endtrans %}</dt>
-                <dt>Debug Language: {{ language }}</dt>
                 {% for version in versions %}
                     <dd>
                         {%  if language and language in locales[version] %}
-                            Debug: {{ locales[version] }}
                         <a {{ mark_current(version, current_version) }}
                             href="{{ page_link(version=version) }}">{{ version }}
                         </a>
