@@ -13,6 +13,8 @@ def build_locale_map():
             continue
         k = k[len("LOCALES_"):].replace('_', '.')
         locales[k.lower()] = v.split()
+    print("[sponge-docs-theme] Following versions and translations were found:")
+    print(locales)
     return locales
 
 
