@@ -127,6 +127,7 @@ jobs:
         build-args: |
           GITHUB_USER=${{ github.actor }}
           GITHUB_TOKEN=${{ github.token }}
+          GITHUB_REPO=https://github.com/SpongePowered/SpongeDocs
           CROWDIN_TOKEN=${{ secrets.CROWDIN_TOKEN }}
           CROWDIN_PROJECT_ID=${{ secrets.CROWDIN_PROJECT_ID }}
           BASE_URL=https://docs.spongepowered.org
