@@ -10,7 +10,7 @@ setup(
     license='MIT',
 
     packages=['sponge_docs_theme'],
-    install_requires=['sphinx_rtd_theme==0.5.1'],
+    install_requires=['sphinx_rtd_theme==0.5.2'],
 
     message_extractors={
         'src/theme/js': [
