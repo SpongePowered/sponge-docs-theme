@@ -11,7 +11,7 @@ const
     htmlmin = require('gulp-htmlmin'),
 
     // CSS
-    sass = require('gulp-sass'),
+    sass = require('gulp-sass')(require('sass')),
     postcss = require('gulp-postcss'),
     autoprefixer = require('autoprefixer'),
     cleanCSS = require('gulp-clean-css'),
