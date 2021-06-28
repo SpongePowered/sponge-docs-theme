@@ -53,7 +53,7 @@ if (crowdinProjectId && crowdinToken) {
 
             result[0].forEach(version => {
                 promises.push(rp({
-                    uri: `https://api.crowdin.com/api/v2/projects/${crowdinProjectId}/branches/${result[1][version]}/languages/progress`,
+                    uri: `https://api.crowdin.com/api/v2/projects/${crowdinProjectId}/branches/${result[1][version]}/languages/progress?limit=500`,
                     headers: headers,
                     json: true
                 }).then(resp => {
