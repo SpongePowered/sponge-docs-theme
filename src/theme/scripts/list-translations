@@ -30,7 +30,7 @@ for language in r.json()['data']:
 if not branchId:
     sys.exit(f"Could not find specified branch: ${branchId}!")
 
-r = requests.get('https://api.crowdin.com/api/v2/projects/%s/branches/%s/languages/progress' %
+r = requests.get('https://api.crowdin.com/api/v2/projects/%s/branches/%s/languages/progress?limit=500' %
                  (CROWDIN_PROJECT_ID, branchId), headers=headers)
 r.raise_for_status()
 
