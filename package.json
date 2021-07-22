@@ -19,7 +19,7 @@
     "gulp-svgmin": "^4.0.1",
     "gulp-uglify": "^3.0.0",
     "plugin-error": "^1.0.1",
-    "postcss": "^8.3.5",
+    "postcss": "^8.3.6",
     "request": "^2.79.0",
     "request-promise-native": "^1.0.3",
     "sass": "^1.35.2"
