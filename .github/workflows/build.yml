@@ -33,7 +33,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
     - name: Setup Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2.5.1
       with:
         node-version: ${{ matrix.node-version }}
     - name: Setup Python ${{ matrix.python-version }}
@@ -70,7 +70,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
     - name: Setup Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2.5.1
       with:
         node-version: 14
     - name: Setup Python 3.x
