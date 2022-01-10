@@ -2,7 +2,7 @@
   "name": "sponge-docs-theme",
   "private": true,
   "devDependencies": {
-    "autoprefixer": "^10.4.1",
+    "autoprefixer": "^10.4.2",
     "cldr-core": "^38.0.0",
     "cldr-localenames-modern": "^38.0.0",
     "cldrjs": "^0.5.5",
