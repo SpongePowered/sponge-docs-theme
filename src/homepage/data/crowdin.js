@@ -3,7 +3,7 @@ const github = require('./github');
 
 const crowdinProjectId = process.env.CROWDIN_PROJECT_ID;
 const crowdinToken = process.env.CROWDIN_TOKEN;
-const crowdinBaseUrl = process.env.CROWDIN_BASE_URL;
+const crowdinBaseUrl = process.env.CROWDIN_BASE_URL || "https://crowdin.com";
 
 const localLanguages = require('./languages');
 
