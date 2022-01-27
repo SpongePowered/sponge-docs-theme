@@ -1,13 +1,12 @@
 import json
 import os.path
-
 import babel
 import requests
 from sphinx.util import logging
 
 from . import __version__
 
-CROWDIN_BASE_URL = os.environ['CROWDIN_BASE_URL']
+CROWDIN_BASE_URL = os.getenv('CROWDIN_BASE_URL', 'https://crowdin.com')
 LOCAL_LANGUAGES_FILE = os.path.join(os.path.dirname(__file__), 'languages.json')
 LANGUAGES_FILE = 'build/languages.json'
 languages = None
