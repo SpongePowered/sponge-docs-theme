@@ -102,4 +102,5 @@ jobs:
           GITHUB_TOKEN=${{ github.token }}
           CROWDIN_TOKEN=${{ secrets.CROWDIN_TOKEN }}
           CROWDIN_PROJECT_ID=${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_BASE_URL=https://spongepowered.crowdin.com
           BASE_URL=https://docs.spongepowered.org

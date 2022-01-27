@@ -3,6 +3,7 @@ const github = require('./github');
 
 const crowdinProjectId = process.env.CROWDIN_PROJECT_ID;
 const crowdinToken = process.env.CROWDIN_TOKEN;
+const crowdinBaseUrl = process.env.CROWDIN_BASE_URL || "https://crowdin.com";
 
 const localLanguages = require('./languages');
 
@@ -13,7 +14,7 @@ const headers = {
 
 module.exports.getLocaleMappings = () =>
     rp({
-        uri: 'https://api.crowdin.com/api/v2/languages?limit=500',
+        uri: `${crowdinBaseUrl}/api/v2/languages?limit=500`,
         headers: {
             'Accept': 'application/json'
         },
@@ -34,7 +35,7 @@ if (crowdinProjectId && crowdinToken) {
     getBranchMappings = () => new Promise((resolve, reject) => {
         let crowdinBranches =  {};
         rp({
-            uri: `https://api.crowdin.com/api/v2/projects/${crowdinProjectId}/branches`,
+            uri: `${crowdinBaseUrl}/api/v2/projects/${crowdinProjectId}/branches`,
             headers: headers,
             json: true
         }).then((resp) => {
@@ -53,7 +54,7 @@ if (crowdinProjectId && crowdinToken) {
 
             result[0].forEach(version => {
                 promises.push(rp({
-                    uri: `https://api.crowdin.com/api/v2/projects/${crowdinProjectId}/branches/${result[1][version]}/languages/progress?limit=500`,
+                    uri: `${crowdinBaseUrl}/api/v2/projects/${crowdinProjectId}/branches/${result[1][version]}/languages/progress?limit=500`,
                     headers: headers,
                     json: true
                 }).then(resp => {

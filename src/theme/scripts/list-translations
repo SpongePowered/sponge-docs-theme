@@ -6,6 +6,7 @@ import sys
 
 CROWDIN_PROJECT_ID = os.environ['CROWDIN_PROJECT_ID']
 CROWDIN_TOKEN = os.environ['CROWDIN_TOKEN']
+CROWDIN_BASE_URL = os.environ['CROWDIN_BASE_URL']
 
 BRANCH = sys.argv[1]
 
@@ -15,14 +16,14 @@ headers = {
 }
 
 # Load language mappings
-r = requests.get('https://api.crowdin.com/api/v2/languages?limit=500')
+r = requests.get('%s/api/v2/languages?limit=500' % CROWDIN_BASE_URL)
 r.raise_for_status()
 
 # Map Crowdin codes to locale codes
 languages = {lang['data']['id']: lang['data']['locale'].replace('-', '_') for lang in r.json()['data']}
 
 branchId = None
-r = requests.get('https://api.crowdin.com/api/v2/projects/%s/branches' % CROWDIN_PROJECT_ID, headers=headers)
+r = requests.get('%s/api/v2/projects/%s/branches' % (CROWDIN_BASE_URL, CROWDIN_PROJECT_ID), headers=headers)
 r.raise_for_status()
 for language in r.json()['data']:
     if language['data']['name'] == BRANCH:
@@ -30,8 +31,8 @@ for language in r.json()['data']:
 if not branchId:
     sys.exit(f"Could not find specified branch: ${branchId}!")
 
-r = requests.get('https://api.crowdin.com/api/v2/projects/%s/branches/%s/languages/progress?limit=500' %
-                 (CROWDIN_PROJECT_ID, branchId), headers=headers)
+r = requests.get('%s/api/v2/projects/%s/branches/%s/languages/progress?limit=500' %
+                 (CROWDIN_BASE_URL, CROWDIN_PROJECT_ID, branchId), headers=headers)
 r.raise_for_status()
 
 locales = []
