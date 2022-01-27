@@ -30,10 +30,11 @@
 {% block extrahead %}
     {% if language == 'translate' %}
         {# Include Crowdin In-Context Localization JS app if this is the translation build #}
-        <script>
-            // Set Crowdin project context for In-Context Localization
-            var _jipt = [['project', 'sponge-docs']];
+        <script type="text/javascript">
+            var _jipt = [];
+            _jipt.push(['project', '0a86ffd1f9737b034a2ff35f6611ae96']);
+            _jipt.push(['domain', 'spongepowered']);
         </script>
-        <script src="https://cdn.crowdin.com/jipt/jipt.js"></script>
+        <script type="text/javascript" src="https://cdn.crowdin.com/jipt/jipt.js"></script>
     {% endif %}
 {% endblock %}
