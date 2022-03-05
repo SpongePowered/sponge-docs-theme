@@ -10,6 +10,9 @@ CROWDIN_BASE_URL = os.environ['CROWDIN_BASE_URL']
 
 BRANCH = sys.argv[1]
 
+if BRANCH == 'stable':
+    BRANCH = '7.4.0'
+
 headers = {
     'Authorization': 'Bearer ' + CROWDIN_TOKEN,
     'Accept': 'application/json'
