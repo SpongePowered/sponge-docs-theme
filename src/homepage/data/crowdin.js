@@ -53,8 +53,10 @@ if (crowdinProjectId && crowdinToken) {
             let promises = [];
 
             result[0].forEach(version => {
+                const hackedVersion = version === 'stable' ? '7.4.0' : version;
+
                 promises.push(rp({
-                    uri: `${crowdinBaseUrl}/api/v2/projects/${crowdinProjectId}/branches/${result[1][version]}/languages/progress?limit=500`,
+                    uri: `${crowdinBaseUrl}/api/v2/projects/${crowdinProjectId}/branches/${result[1][hackedVersion]}/languages/progress?limit=500`,
                     headers: headers,
                     json: true
                 }).then(resp => {
