@@ -75,7 +75,7 @@ jobs:
     steps:
     - name: Docker Metadata
       id: docker_meta
-      uses: docker/metadata-action@v3
+      uses: docker/metadata-action@v4
       with:
         images: ghcr.io/spongepowered/sponge-docs-theme
         tags: |
