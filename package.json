@@ -22,7 +22,7 @@
     "postcss": "^8.4.14",
     "request": "^2.79.0",
     "request-promise-native": "^1.0.3",
-    "sass": "^1.52.3"
+    "sass": "^1.54.0"
   },
   "scripts": {
     "build": "gulp build",
