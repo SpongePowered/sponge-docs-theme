@@ -17,6 +17,20 @@
       ],
       "groupName": "all non-major npm dependencies",
       "groupSlug": "all-npm-minor-patch"
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "all non-major docker images",
+      "groupSlug": "all-docker-minor-patch"
     }
   ]
 }
