@@ -2,9 +2,9 @@
   "name": "sponge-docs-theme",
   "private": true,
   "devDependencies": {
-    "autoprefixer": "^10.4.7",
-    "cldr-core": "^38.0.0",
-    "cldr-localenames-modern": "^38.0.0",
+    "autoprefixer": "10.4.12",
+    "cldr-core": "38.1.0",
+    "cldr-localenames-modern": "38.1.0",
     "cldrjs": "^0.5.5",
     "del": "^6.1.1",
     "gulp": "^4.0.2",
@@ -19,10 +19,10 @@
     "gulp-svgmin": "^4.1.0",
     "gulp-uglify": "^3.0.0",
     "plugin-error": "^1.0.1",
-    "postcss": "^8.4.14",
+    "postcss": "8.4.17",
     "request": "^2.79.0",
     "request-promise-native": "^1.0.3",
-    "sass": "^1.52.3"
+    "sass": "1.55.0"
   },
   "scripts": {
     "build": "gulp build",
