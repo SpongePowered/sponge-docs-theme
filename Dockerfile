@@ -22,6 +22,6 @@ RUN ./node_modules/.bin/gulp homepage:build
 
 #------- Copy to nginx
 
-FROM nginx:1.19.4-alpine
+FROM nginx:1.23.1-alpine
 
 COPY --from=builder /app/dist/homepage /usr/share/nginx/html
