@@ -65,9 +65,11 @@ jobs:
           ./node_modules/.bin/gulp clean
           ./node_modules/.bin/gulp theme:build
     - name: Setup for publishing
-      run: python setup.py sdist bdist_wheel
+      run: python setup.py sdist bdist_wheel --dist-dir=pypi-dist
     - name: Publish
       uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        packages-dir: pypi-dist
 
   publish-docker:
     runs-on: ubuntu-latest
