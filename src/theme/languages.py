@@ -12,12 +12,24 @@ LANGUAGES_FILE = 'build/languages.json'
 languages = None
 
 
+def _lookup_language(locale_code):
+    # Sphinx <=8 passes the language config through untouched (e.g. ``de_DE``);
+    # Sphinx 9 normalizes it to the hyphenated BCP-47 form (``de-DE``) before it
+    # reaches template context. Our ``languages`` dict is keyed in underscored
+    # form, so accept either and fall back to the underscored variant.
+    if locale_code in languages:
+        return locale_code, languages[locale_code]
+    normalized = locale_code.replace('-', '_')
+    return normalized, languages[normalized]
+
+
 def get_language_code(locale_code):
-    return languages[locale_code]['code']
+    _, lang = _lookup_language(locale_code)
+    return lang['code']
 
 
 def get_language_display_name(locale_code):
-    lang = languages[locale_code]
+    resolved_code, lang = _lookup_language(locale_code)
 
     # Compute display name if not already cached
     if 'display_name' not in lang:
@@ -33,7 +45,7 @@ def get_language_display_name(locale_code):
                 locale.territory = None
 
             try:
-                lang['display_name'] = locale.languages[locale_code].title()
+                lang['display_name'] = locale.languages[resolved_code].title()
             except KeyError:
                 lang['display_name'] = locale.language_name.title()
         except babel.UnknownLocaleError:

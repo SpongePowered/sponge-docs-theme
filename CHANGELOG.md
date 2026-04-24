@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.4
+
+- Fix `KeyError` during per-locale builds on Sphinx 9. Sphinx 9 normalizes the
+  `language` config to the hyphenated BCP-47 form (e.g. `de-DE`) before passing
+  it to the Jinja template context, but the theme's `languages` dict is keyed
+  in the underscored form that Crowdin's locale strings are rewritten to at
+  load time. `get_language_code` / `get_language_display_name` now accept
+  either form and fall back to the underscored variant, so the `versions.html`
+  template renders cleanly under Sphinx 7, 8, and 9.
+
 ## 1.2.3
 
 - Register `translations.js` via `builder.add_js_file()` instead of appending to
