@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.2
+
+- Bump `install_requires` ceiling to `sphinx>=4.5,<10` so the theme installs
+  alongside Sphinx 9.x. No template, CSS, or Python API changes — verified by
+  running a full SpongeDocs build with `-W` against Sphinx 9.1.0.
+
 ## 1.2.0
 
 - Bump `install_requires` to `sphinx-rtd-theme>=2.0,<4` and `sphinx>=4.5,<9` so

@@ -11,7 +11,7 @@ setup(
 
     packages=['sponge_docs_theme'],
     install_requires=[
-        'sphinx>=4.5,<9',
+        'sphinx>=4.5,<10',
         'sphinx_rtd_theme>=2.0,<4',
     ],
 
