@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.3
+
+- Register `translations.js` via `builder.add_js_file()` instead of appending to
+  `builder.script_files`. In Sphinx 7+, `script_files` contains `JavaScript`
+  objects rather than strings, so the old duplicate-guard check no longer
+  matched and caused the file to be re-appended on every build.
+
 ## 1.2.2
 
 - Bump `install_requires` ceiling to `sphinx>=4.5,<10` so the theme installs

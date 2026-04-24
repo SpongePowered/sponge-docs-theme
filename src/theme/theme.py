@@ -50,8 +50,7 @@ def init(app):
         app.config.html_search_language = strip_country(app.config.language)
 
     # Add translations.js for our JavaScript translations
-    if '_static/translations.js' not in app.builder.script_files:
-        app.builder.script_files.append('_static/translations.js')
+    app.builder.add_js_file('translations.js')
 
     app.connect('build-finished', copy_js_translations)
 
