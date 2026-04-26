@@ -6,7 +6,10 @@
         <h1>Welcome to the Sponge Documentation</h1>
         <p>The official, curated documentation for the Sponge project.</p>
 
-        <form action="/stable/en/search.html">
+        {# Search submits a GET to /{slug}/en/search.html?q=… — the slug is
+           rewritten by version-selector.js to whichever version is currently
+           selected in the dropdown below. /stable/en/ is the no-JS fallback. #}
+        <form action="/stable/en/search.html" data-version-search-form>
             <div class="input-group">
                 <input type="text" name="q" placeholder="Search" class="form-control">
                 <div class="input-group-addon"><i class="fa fa-search"></i></div>
@@ -14,33 +17,28 @@
         </form>
     </header>
 
-    <section class="row languages">
-        {% for language in languages[mainVersion] %}
-            <div class="col-xs-6 col-sm-4 col-md-3">
-                <a href="/{{ mainVersion }}/{{ language.id }}/">
-                    <img src="{{ baseUrl }}/{{ mainVersion }}/en/_static/flags/{{ language.locale }}.svg">
-                    <p>{{ language.displayName }}</p>
-                </a>
+    {# Runtime version + locale picker — populated by version-selector.js
+       from /manifest.json. The HTML ships generic; nothing about the
+       version/locale matrix is baked in. The version <select> drives a
+       flag-grid of available locales for the chosen version, re-rendered
+       on change. #}
+    <section class="version-picker" data-version-selector="homepage">
+        <div data-version-widget hidden>
+            <div class="version-control">
+                <label>
+                    <span>Version</span>
+                    <select data-version-select aria-label="Version"></select>
+                </label>
             </div>
-        {% endfor %}
+            <div class="row languages" data-locale-grid></div>
+        </div>
+        <noscript>
+            <p class="version-picker-fallback-msg">
+                <a class="btn btn-primary" href="/stable/en/">Open documentation</a>
+            </p>
+        </noscript>
+        <div class="version-picker-fallback" data-version-fallback hidden>
+            <p><a class="btn btn-primary" href="/stable/en/">Open documentation</a></p>
+        </div>
     </section>
-
-    <h2 id="older-versions">Older versions</h2>
-
-    {% for version in versions %}
-        <section class="row old-version">
-            <div class="col-xs-12">
-                <h3>{{ version }}</h3>
-            </div>
-            {% for language in languages[version] %}
-                <div class="col-xs-2 col-md-1">
-                    <a href="/{{ version }}/{{ language.id }}/">
-                        <img src="{{ baseUrl }}/{{ mainVersion }}/en/_static/flags/{{ language.locale }}.svg">
-                    </a>
-                </div>
-            {% endfor %}
-        </section>
-    {% endfor %}
-
-
 {% endblock %}

@@ -1,50 +1,41 @@
-{% macro mark_current(compare, current) %}
-    {% if compare == current %}class="current"{% endif %}
-{% endmacro %}
-
-{% macro language_flag(locale) %}
-    <img src="{{ pathto('_static/flags/' + locale + '.svg', 1) }}"
-         alt="{{ locale|language_code }}" title="{{ locale|language_display_name }}">
-{% endmacro %}
-
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <i class="fa fa-book"> <span>SpongeDocs</span></i>
         v: {{ release }}
-        {% if language and language != 'translate' %}{{ language_flag(language) }}{% endif %}
+        {% if language and language != 'translate' %}
+            <span class="current-locale">{{ language }}</span>
+        {% endif %}
         <span class="fa fa-caret-down"></span>
     </span>
     <div id="versions" class="rst-other-versions">
 
-        {# Languages #}
-        {% if locales[current_version] %}
-            <dl id="languages">
-                <dt>{% trans %}Languages{% endtrans %}</dt>
-                {% for locale in locales[current_version] %}
-                    {% if locale != 'translate' %}
-                        <dd><a href="{{ page_link(language=locale) }}">{{ language_flag(locale) }}</a></dd>
-                    {% endif %}
-                {% endfor %}
-            </dl>
-        {% endif %}
-
-        {# Versions #}
-        {% if versions %}
-            <dl>
+        {# Runtime version + locale picker — populated by version-selector.js
+           from /manifest.json. The selector is bundled into spongedocs.js
+           (alongside the rest of the theme JS) and mounted here. The current
+           version, locale, and page path are stamped as data-* attributes so
+           the JS can pre-select the matching options and build the
+           cross-version navigation URLs. #}
+        <div data-version-selector="page"
+             data-current-version="{{ current_version or '' }}"
+             data-current-locale="{{ language or 'en' }}"
+             data-page-path="{{ pagename }}{{ file_suffix }}">
+            <dl data-version-widget hidden>
                 <dt>{% trans %}Versions{% endtrans %}</dt>
-                {% for version in versions %}
-                    <dd>
-                        {%  if language and language in locales[version] %}
-                        <a {{ mark_current(version, current_version) }}
-                            href="{{ page_link(version=version) }}">{{ version }}
-                        </a>
-                        {% else %}
-                        <a href="{{ page_link(version=version, language="en") }}">{{ version }} (en)</a>
-                        {% endif %}
-                    </dd>
-                {% endfor %}
+                <dd><select data-version-select aria-label="Version"></select></dd>
+                <dt>{% trans %}Languages{% endtrans %}</dt>
+                <dd><select data-locale-select aria-label="Language"></select></dd>
             </dl>
-        {% endif %}
+            <noscript>
+                <dl>
+                    <dt>{% trans %}Versions{% endtrans %}</dt>
+                    <dd><a href="/">{% trans %}Pick a version{% endtrans %}</a></dd>
+                </dl>
+            </noscript>
+            <dl data-version-fallback hidden>
+                <dt>{% trans %}Versions{% endtrans %}</dt>
+                <dd><a href="/">{% trans %}Pick a version{% endtrans %}</a></dd>
+            </dl>
+        </div>
 
         {# Offline usage #}
         {% if html_download %}
@@ -54,17 +45,15 @@
             </dl>
         {% endif %}
 
-        {# Contribute #}
-        {% if github_page_link or (locales and 'translate' in locales[current_version]) %}
+        {# Contribute — Source/Edit are static; Translate is revealed by
+           version-selector.js only when the current version's manifest entry
+           lists the Crowdin 'translate' pseudo-locale. #}
+        {% if github_page_link %}
             <dl>
                 <dt>{% trans %}Contribute{% endtrans %}</dt>
-                {% if github_page_link %}
-                    <dd><a href="{{ github_page_link() }}">{{ _("Source") }}</a></dd>
-                    <dd><a href="{{ github_page_link('edit') }}">{{ _("Edit") }}</a></dd>
-                {% endif %}
-                {% if locales and 'translate' in locales[current_version] %}
-                    <dd><a href="{{ page_link(language='translate') }}">{{ _("Translate") }}</a></dd>
-                {% endif %}
+                <dd><a href="{{ github_page_link() }}">{{ _("Source") }}</a></dd>
+                <dd><a href="{{ github_page_link('edit') }}">{{ _("Edit") }}</a></dd>
+                <dd hidden data-translate-link><a href="/">{{ _("Translate") }}</a></dd>
             </dl>
         {% endif %}
     </div>

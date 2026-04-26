@@ -19,8 +19,35 @@ header {
   }
 }
 
+.version-picker {
+  margin-top: 40px;
+  text-align: center;
+
+  .version-control {
+    margin-bottom: 20px;
+
+    label {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-weight: 600;
+
+      span {
+        margin-bottom: 4px;
+      }
+    }
+
+    select {
+      min-width: 260px;
+      padding: 6px 10px;
+      border: 1px solid #e5e5e5;
+      border-radius: 3px;
+    }
+  }
+}
+
 .languages {
-  margin-top: 30px;
+  margin-top: 10px;
   text-align: center;
 
   div {
@@ -41,27 +68,6 @@ header {
     width: 20%;
     min-width: 50px;
     border-radius: 5px;
-    border: 1px solid #e5e5e5;
-  }
-}
-
-#older-versions {
-  text-align: center;
-  margin-top: 70px;
-}
-
-.old-version {
-  text-align: center;
-
-  a {
-    display: inline-block;
-    line-height: 35px;
-  }
-
-  img {
-    width: 40px;
-    border-radius: 3px;
-    margin-right: 20px;
     border: 1px solid #e5e5e5;
   }
 }

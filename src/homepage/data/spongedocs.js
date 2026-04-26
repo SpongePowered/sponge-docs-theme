@@ -1,45 +1,32 @@
-const
-    cldr = require('./cldr'),
-    crowdin = require('./crowdin');
+const github = require('./github');
+const crowdin = require('./crowdin');
 
-const baseUrl = process.env.BASE_URL;
+function pickDefault(versions) {
+    // Prefer an explicit `stable` branch when present; otherwise the
+    // highest release-N (which sortVersions already places first).
+    const stable = versions.find(v => v.branch === 'stable');
+    if (stable) return stable.slug;
+    return versions[0] && versions[0].slug;
+}
 
-function prepareData(cldr, languages, localeMappings) {
-    let versions = Object.keys(languages);
-    versions.sort().reverse()
-
-    // Add native language names to each language
-    for (version of versions) {
-        const versionLanguages = languages[version];
-        console.log(`Loaded version ${version} with ${versionLanguages.length + 1} supported languages`);
-
-        for(language of versionLanguages) {
-            const locale = localeMappings[language.id].locale;
-            language.locale = locale.replace('-', '_');
-
-            language.name = localeMappings[language.id].name;
-
-            const name = cldr.getDisplayName(language.locale, locale);
-            language.displayName = name || language.name;
-        }
-
-        // Add source language
-        languages[version].unshift({
-            name: "English",
-            displayName: "English",
-            id: 'en',
-            locale: 'en'
-        });
-    }
-
-    const mainVersion = versions.shift();
-
+function buildManifest(versions, localesByIndex) {
+    const enriched = versions.map((v, i) => ({
+        slug: v.slug,
+        label: v.label,
+        branch: v.branch,
+        locales: localesByIndex[i]
+    }));
     return {
-        baseUrl, mainVersion,
-        versions, languages
+        default: pickDefault(enriched),
+        versions: enriched
     };
 }
 
-module.exports.loadData = (done) =>
-    Promise.all([cldr.load(), crowdin.getLanguages(), crowdin.getLocaleMappings()])
-        .then(values => prepareData(...values));
+module.exports.loadManifest = () =>
+    github.getVersions().then(versions => {
+        if (!versions.length) {
+            throw new Error('No documentation versions found');
+        }
+        return crowdin.getLocalesForVersions(versions)
+            .then(locales => buildManifest(versions, locales));
+    });

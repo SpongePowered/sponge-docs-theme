@@ -3,6 +3,8 @@ const
     PluginError = require('plugin-error'),
     concat = require('gulp-concat'),
     del = require('del'),
+    fs = require('fs'),
+    path = require('path'),
 
     svgmin = require('gulp-svgmin'),
 
@@ -55,7 +57,9 @@ function themeScss() {
 }
 
 function themeJS() {
-    return gulp.src('src/theme/js/*.js')
+    // Concatenate the shared modules first so the theme bundle has the runtime
+    // version+locale selector available alongside the rest of the theme JS.
+    return gulp.src(['src/shared/*.js', 'src/theme/js/*.js'])
         .pipe(concat('spongedocs.js'))
         .pipe(buble({
             transforms: {
@@ -102,7 +106,7 @@ const watch = gulp.series(themeBuild, function watch() {
     gulp.watch('src/theme/svg/**', themeSVG);
     gulp.watch('src/theme/scripts/**', themeScripts);
     gulp.watch('src/theme/scss/**', themeScss);
-    gulp.watch('src/theme/js/*.js', gulp.series(themeJS, themeJSgetText));
+    gulp.watch(['src/theme/js/*.js', 'src/shared/*.js'], gulp.series(themeJS, themeJSgetText));
     gulp.watch('src/theme/js/offline/worker.js', themeJSWorker);
 });
 
@@ -113,20 +117,16 @@ exports['theme:watch'] = watch;
 exports.theme = watch;
 
 // Homepage
-let renderData = null;
+//
+// The version+locale matrix is no longer baked into index.html — the page
+// fetches /manifest.json at runtime via version-selector.js. The build still
+// emits a manifest for local dev (using GitHub+Crowdin or the offline
+// test-*.json fallbacks) so a developer can serve dist/homepage/ directly
+// without a live k8s ConfigMap.
 
-
-function homepageLoadData(cb) {
-    !renderData && require('./src/homepage/data/spongedocs').loadData()
-        .then(data => {
-            renderData = data
-            cb();
-        });
-}
-
-const homepageHTML = gulp.series(homepageLoadData, function homepageHtml() {
+function homepageHTML() {
     return gulp.src('src/homepage/html/*.html')
-        .pipe(nunjucks.compile(renderData))
+        .pipe(nunjucks.compile({}))
         .pipe(htmlmin({
             collapseBooleanAttributes: true,
             collapseWhitespace: true,
@@ -140,7 +140,7 @@ const homepageHTML = gulp.series(homepageLoadData, function homepageHtml() {
             useShortDoctype: true
         }))
         .pipe(gulp.dest('dist/homepage'));
-});
+}
 
 function homepageScss() {
     return gulp.src('src/homepage/scss/spongedocs.scss')
@@ -150,11 +150,44 @@ function homepageScss() {
         .pipe(gulp.dest('dist/homepage/_static/css'));
 }
 
-const homepageBuild = gulp.series(homepageHTML, homepageScss);
+function homepageJS() {
+    return gulp.src('src/shared/version-selector.js')
+        .pipe(buble({ transforms: { dangerousForOf: true } }))
+        .pipe(uglify({ mangle: { toplevel: true } }))
+        .pipe(gulp.dest('dist/homepage/_static/js'));
+}
+
+// Ship the theme's flag SVGs alongside the homepage so the runtime selector
+// can render the locale tiles standalone — the homepage is its own
+// Deployment in the new k8s layout and can't depend on a docs version
+// deployment serving /{slug}/en/_static/flags/.
+function homepageFlags() {
+    return gulp.src('src/theme/svg/flags/**/*.svg')
+        .pipe(svgmin())
+        .pipe(gulp.dest('dist/homepage/_static/flags'));
+}
+
+function homepageManifest(cb) {
+    require('./src/homepage/data/spongedocs').loadManifest()
+        .then(manifest => {
+            const outDir = path.join(__dirname, 'dist', 'homepage');
+            fs.mkdirSync(outDir, { recursive: true });
+            fs.writeFileSync(path.join(outDir, 'manifest.json'),
+                JSON.stringify(manifest, null, 2) + '\n');
+            console.log(`Wrote dist/homepage/manifest.json (${manifest.versions.length} versions, default=${manifest.default})`);
+            cb();
+        })
+        .catch(err => cb(new PluginError('homepage:manifest', err)));
+}
+
+const homepageBuild = gulp.series(homepageHTML, homepageScss, homepageJS, homepageFlags, homepageManifest);
 
 const homepageWatch = gulp.series(homepageBuild, function homepageWatch() {
     gulp.watch('src/homepage/html/**', homepageHTML);
     gulp.watch('src/homepage/scss/**', homepageScss);
+    gulp.watch('src/shared/*.js', homepageJS);
+    gulp.watch('src/theme/svg/flags/**', homepageFlags);
+    gulp.watch('src/homepage/data/**', homepageManifest);
 });
 
 exports['homepage:build'] = homepageBuild;
