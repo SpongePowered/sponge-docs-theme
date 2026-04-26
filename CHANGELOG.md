@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0a2 (pre-release)
+
+- CI: publish the homepage Docker image on tag pushes too (was
+  master-only); the image is tagged with the bare git tag
+  (`ghcr.io/spongepowered/sponge-docs-theme:1.3.0a2`). No code
+  changes vs 1.3.0a1.
+
 ## 1.3.0a1 (pre-release)
 
 - Replace the build-time-baked version + locale matrix with a runtime
