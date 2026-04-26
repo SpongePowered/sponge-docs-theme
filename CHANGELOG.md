@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.3.0a3 (pre-release)
+
+- Homepage flag tiles now honor an optional `flag` field on each locale
+  entry in `manifest.json`, used as the `_static/flags/{flag}.svg`
+  basename. `code` continues to drive the URL (`/{slug}/{code}/`). This
+  decouples the on-disk locale dir name from the bundled flag SVG name —
+  needed by the SpongeDocs per-version Deployments where on-disk locales
+  are hyphen-form (`pt-BR`) but the flag SVGs ship as underscore-form
+  (`pt_BR.svg`). When `flag` is absent the code is used for both, so
+  existing manifests keep working.
+
 ## 1.3.0a2 (pre-release)
 
 - CI: publish the homepage Docker image on tag pushes too (was

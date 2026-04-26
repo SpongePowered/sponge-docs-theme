@@ -20,11 +20,17 @@
 //         "branch": "release-12",
 //         "locales": [
 //           { "code": "en",    "name": "English" },
-//           { "code": "de_DE", "name": "German" }
+//           { "code": "de",    "flag": "de_DE", "name": "German" }
 //         ]
 //       }
 //     ]
 //   }
+//
+// `code` is the on-disk URL form (used to build /{slug}/{code}/). `flag` is
+// optional and overrides the SVG basename used for the flag tile — it
+// exists because the on-disk locale dirs and the bundled flag SVG names
+// don't always agree (e.g. `pt-BR` on disk, `pt_BR.svg` for the flag).
+// When `flag` is absent the code is used for both.
 //
 // Bare-string locales (`"locales": ["en", "de_DE"]`) are also accepted; the
 // JS treats the code as the display name in that case.
@@ -45,7 +51,7 @@
 
     function normalizeLocale(entry) {
         if (typeof entry === 'string') return { code: entry, name: entry };
-        return { code: entry.code, name: entry.name || entry.code };
+        return { code: entry.code, name: entry.name || entry.code, flag: entry.flag };
     }
 
     function localesOf(version) {
@@ -122,7 +128,7 @@
         anchor.href = '/' + version.slug + '/' + locale.code + '/';
 
         var img = document.createElement('img');
-        img.src = '/_static/flags/' + locale.code + '.svg';
+        img.src = '/_static/flags/' + (locale.flag || locale.code) + '.svg';
         img.alt = locale.name;
         anchor.appendChild(img);
 
