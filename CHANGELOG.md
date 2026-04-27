@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.3.0a4 (pre-release)
+
+- Build now emits short-code flag aliases (e.g. `ko.svg`, `de.svg`) next to
+  the bundled POSIX-form flag SVGs (`ko_KR.svg`, `de_DE.svg`) in both the
+  homepage Deployment (`dist/homepage/_static/flags/`) and the Sphinx theme
+  bundle (`sponge_docs_theme/static/flags/`). Aliases are written only when
+  a language prefix has a single bundled country variant; the ambiguous
+  `pt` (pt_BR + pt_PT) and `zh` (zh_CN + zh_TW) prefixes are deliberately
+  not aliased and continue to require POSIX-form codes (or an explicit
+  `flag` override) in the manifest. The existing `en.svg` short-code asset
+  is preserved.
+
+  Fixes the staging 404 where per-version manifests emit short-form locale
+  codes (`code: "ko"`) while the theme image only shipped POSIX filenames —
+  the runtime selector now resolves both styles without coordinated
+  changes to the manifest emitter.
+
 ## 1.3.0a3 (pre-release)
 
 - Homepage flag tiles now honor an optional `flag` field on each locale

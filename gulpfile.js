@@ -43,6 +43,48 @@ function themeSVG() {
         .pipe(gulp.dest('sponge_docs_theme/static'));
 }
 
+// For each minified `xx_YY.svg` flag in `destDir`, write a short-code alias
+// `xx.svg` when the language prefix is unambiguous (only one country variant
+// is bundled). Upstream manifest emitters sometimes emit short-form locale
+// codes (`ko`) while this repo bundles POSIX-form flag SVGs (`ko_KR.svg`);
+// the runtime selector builds `/_static/flags/{locale.flag || locale.code}.svg`,
+// so aliasing here keeps both manifest styles rendering without
+// cross-repo coordination. Existing short-code SVGs (e.g. `en.svg`) are not
+// overwritten, and ambiguous prefixes (`pt`: pt_BR + pt_PT; `zh`: zh_CN +
+// zh_TW) are skipped — those locales are expected to keep their POSIX form
+// in the manifest.
+function writeFlagAliases(destDir, cb) {
+    let files;
+    try {
+        files = fs.readdirSync(destDir).filter(f => f.endsWith('.svg'));
+    } catch (err) {
+        return cb(err.code === 'ENOENT' ? null : err);
+    }
+    const byPrefix = new Map();
+    for (const name of files) {
+        const base = name.slice(0, -'.svg'.length);
+        const underscore = base.indexOf('_');
+        if (underscore === -1) continue;
+        const prefix = base.slice(0, underscore);
+        if (!byPrefix.has(prefix)) byPrefix.set(prefix, []);
+        byPrefix.get(prefix).push(name);
+    }
+    let aliased = 0;
+    for (const [prefix, names] of byPrefix) {
+        if (names.length !== 1) continue;
+        const aliasName = prefix + '.svg';
+        if (files.includes(aliasName)) continue;
+        fs.copyFileSync(path.join(destDir, names[0]), path.join(destDir, aliasName));
+        aliased++;
+    }
+    console.log(`Wrote ${aliased} short-code flag alias(es) to ${path.relative(__dirname, destDir)}`);
+    cb();
+}
+
+function themeFlagAliases(cb) {
+    writeFlagAliases(path.join(__dirname, 'sponge_docs_theme', 'static', 'flags'), cb);
+}
+
 function themeScripts() {
     return gulp.src('src/theme/scripts/**')
         .pipe(gulp.dest('dist/scripts'));
@@ -99,11 +141,11 @@ function themeJSgetText() {
     return shell('babel', 'python', ['setup.py', 'extract_messages', '-o', 'sponge_docs_theme/theme.pot']);
 }
 
-const themeBuild = gulp.series(themeFiles, themeSVG, themeScripts, themeScss, themeJS, themeJSLib, themeJSWorker, themeJSgetText);
+const themeBuild = gulp.series(themeFiles, themeSVG, themeFlagAliases, themeScripts, themeScss, themeJS, themeJSLib, themeJSWorker, themeJSgetText);
 
 const watch = gulp.series(themeBuild, function watch() {
     gulp.watch('src/theme/{*.py,{static,templates}/**}', themeFiles);
-    gulp.watch('src/theme/svg/**', themeSVG);
+    gulp.watch('src/theme/svg/**', gulp.series(themeSVG, themeFlagAliases));
     gulp.watch('src/theme/scripts/**', themeScripts);
     gulp.watch('src/theme/scss/**', themeScss);
     gulp.watch(['src/theme/js/*.js', 'src/shared/*.js'], gulp.series(themeJS, themeJSgetText));
@@ -167,6 +209,10 @@ function homepageFlags() {
         .pipe(gulp.dest('dist/homepage/_static/flags'));
 }
 
+function homepageFlagAliases(cb) {
+    writeFlagAliases(path.join(__dirname, 'dist', 'homepage', '_static', 'flags'), cb);
+}
+
 function homepageManifest(cb) {
     require('./src/homepage/data/spongedocs').loadManifest()
         .then(manifest => {
@@ -180,13 +226,13 @@ function homepageManifest(cb) {
         .catch(err => cb(new PluginError('homepage:manifest', err)));
 }
 
-const homepageBuild = gulp.series(homepageHTML, homepageScss, homepageJS, homepageFlags, homepageManifest);
+const homepageBuild = gulp.series(homepageHTML, homepageScss, homepageJS, homepageFlags, homepageFlagAliases, homepageManifest);
 
 const homepageWatch = gulp.series(homepageBuild, function homepageWatch() {
     gulp.watch('src/homepage/html/**', homepageHTML);
     gulp.watch('src/homepage/scss/**', homepageScss);
     gulp.watch('src/shared/*.js', homepageJS);
-    gulp.watch('src/theme/svg/flags/**', homepageFlags);
+    gulp.watch('src/theme/svg/flags/**', gulp.series(homepageFlags, homepageFlagAliases));
     gulp.watch('src/homepage/data/**', homepageManifest);
 });
 
