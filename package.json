@@ -4,7 +4,7 @@
   "devDependencies": {
     "autoprefixer": "10.4.12",
     "cldr-core": "38.1.0",
-    "cldr-localenames-modern": "38.1.0",
+    "cldr-localenames-modern": "45.0.0",
     "cldrjs": "^0.5.5",
     "del": "^6.1.1",
     "gulp": "^4.0.2",
